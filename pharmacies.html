@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediNetwork - 24/7 Pharmacies & Drugstores</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0077b6;
+            --primary-dark: #03045e;
+            --secondary: #00b4d8;
+            --light: #caf0f8;
+            --bg-color: #f4f7f6;
+            --text-color: #2b2d42;
+            --white: #ffffff;
+            --gray: #8d99ae;
+            --success: #2ec4b6;
+            --accent: #e76f51;
+            --shadow: 0 10px 30px rgba(0, 119, 182, 0.08);
+            --card-hover-shadow: 0 15px 35px rgba(0, 180, 216, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .header-actions .btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .header-actions .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero Sub-Header */
+        .pharmacy-hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .pharmacy-hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pharmacy-hero p {
+            color: var(--light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Search Bar */
+        .filter-container {
+            max-width: 900px;
+            margin: -20px auto 2rem auto;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+
+        /* Category Filter Pills */
+        .filter-tags-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            max-width: 1200px;
+            margin: 0 auto 2.5rem auto;
+            padding: 0 5% 10px 5%;
+            scrollbar-width: thin;
+        }
+
+        .specialty-tag {
+            background: var(--white);
+            border: 1px solid #ddd;
+            color: var(--text-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .specialty-tag:hover, .specialty-tag.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container & Grid */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto 4rem auto;
+            padding: 0 5%;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pharmacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Pharmacy Card Design */
+        .pharmacy-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .pharmacy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .pharmacy-img-wrapper {
+            height: 170px;
+            position: relative;
+            width: 100%;
+        }
+
+        .pharmacy-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rating-overlay {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #f39c12;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .pharmacy-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .pharmacy-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .pharmacy-category-tag {
+            font-size: 0.75rem;
+            background: var(--light);
+            color: var(--primary-dark);
+            padding: 3px 10px;
+            border-radius: 6px;
+            width: fit-content;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .pharmacy-info-row {
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pharmacy-info-row i {
+            color: var(--secondary);
+            width: 16px;
+        }
+
+        .services-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .service-chip {
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* Card Footer Actions (Call & Map) */
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background: #fafafa;
+            border-top: 1px solid #edf2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timing-info {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-call {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        .btn-call:hover {
+            background: #2e7d32;
+            color: var(--white);
+        }
+
+        .btn-map {
+            background: var(--light);
+            color: var(--primary-dark);
+            border: 1px solid #b7e4c7;
+        }
+
+        .btn-map:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* No Results State */
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            grid-column: 1 / -1;
+            display: none;
+            color: var(--gray);
+        }
+
+        /* Responsive Layout */
+        @media(max-width: 768px) {
+            nav ul { display: none; }
+            .filter-container { margin: -10px 15px 1.5rem 15px; }
+            .card-footer { flex-direction: column; align-items: stretch; gap: 12px; }
+            .action-buttons { justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-notes-medical"></i> MediNetwork
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="#">Hospitals</a></li>
+                <li><a href="clinics.html">Clinics</a></li>
+                <li><a href="pharmacies.html" class="active">Pharmacies</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="#" class="btn">Sign In</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pharmacy-hero">
+        <h1>24/7 Pharmacies & Drugstores</h1>
+        <p>Order prescription medications, locate nearby medical stores, and get instant home delivery.</p>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="filter-container">
+        <i class="fa-solid fa-search" style="color: var(--gray); margin-left: 10px;"></i>
+        <input type="text" id="pharmacySearch" placeholder="Search pharmacy name, location, or medicine...">
+    </div>
+
+    <!-- Category Filter Pills -->
+    <div class="filter-tags-scroll">
+        <button class="specialty-tag active" onclick="filterByCategory('all')">All Pharmacies</button>
+        <button class="specialty-tag" onclick="filterByCategory('24/7')">Open 24/7</button>
+        <button class="specialty-tag" onclick="filterByCategory('express')">Express Delivery</button>
+        <button class="specialty-tag" onclick="filterByCategory('surgical')">Surgical & Equipment</button>
+        <button class="specialty-tag" onclick="filterByCategory('organic')">Ayurvedic & Organic</button>
+    </div>
+
+    <!-- Main Grid Container -->
+    <div class="container">
+        <h2 class="section-title"><i class="fa-solid fa-pills"></i> Verified Medical Stores</h2>
+        
+        <div class="pharmacy-grid" id="pharmacyGrid">
+            
+            <!-- Pharmacy 1 -->
+            <div class="pharmacy-card" data-category="24/7" data-name="medplus pharmacy central market prescription delivery baby care">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Open 24/7</span>
+                    <h3 class="pharmacy-name">MedPlus Pharmacy</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> Central Market, Main Street</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Prescription Refills</span>
+                        <span class="service-chip">Home Delivery</span>
+                        <span class="service-chip">Baby Care</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open 24 Hours</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550192834" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=MedPlus+Pharmacy+Central+Market" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharmacy 2 -->
+            <div class="pharmacy-card" data-category="express" data-name="healthfirst drugstore east end road express delivery vitamins emergency meds">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.7</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Express Delivery</span>
+                    <h3 class="pharmacy-name">HealthFirst Drugstore</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> East End Road, Sector 4</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Vitamins & Supplements</span>
+                        <span class="service-chip">Emergency Meds</span>
+                        <span class="service-chip">30-Min Delivery</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 11 PM</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550149201" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=HealthFirst+Drugstore+East+End+Road" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharmacy 3 -->
+            <div class="pharmacy-card" data-category="surgical" data-name="apex surgical & medical supplies westside highway wheel chairs mobility equipment">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1563213126-a4273aed204e?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Surgical & Equipment</span>
+                    <h3 class="pharmacy-name">Apex Surgical Supplies</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> Westside Highway</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Wheelchairs & Walkers</span>
+                        <span class="service-chip">Oxygen Cylinders</span>
+                        <span class="service-chip">Hospital Beds</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 9 PM</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550183920" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=Apex+Surgical+Supplies+Westside+Highway" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharmacy 4 -->
+            <div class="pharmacy-card" data-category="organic" data-name="nature cure ayurvedic & organic pharmacy park street herbal extracts organic honey">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.6</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Ayurvedic & Organic</span>
+                    <h3 class="pharmacy-name">NatureCure Pharmacy</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> Park Street, Block A</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Herbal Extracts</span>
+                        <span class="service-chip">Organic Honey</span>
+                        <span class="service-chip">Natural Oils</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 8 PM</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550123849" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=NatureCure+Pharmacy+Park+Street" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharmacy 5 -->
+            <div class="pharmacy-card" data-category="24/7" data-name="city care 24/7 chemist downtown avenue insulin diabetic care blood pressure monitors">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Open 24/7</span>
+                    <h3 class="pharmacy-name">CityCare 24/7 Chemist</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> Downtown Avenue</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Insulin Storage</span>
+                        <span class="service-chip">BP Monitors</span>
+                        <span class="service-chip">Emergency Delivery</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open 24 Hours</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550175839" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=CityCare+Chemist+Downtown+Avenue" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharmacy 6 -->
+            <div class="pharmacy-card" data-category="express" data-name="careplus express drugstore north plaza general wellness skincare first aid">
+                <div class="pharmacy-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=500&q=80" alt="Pharmacy">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.7</div>
+                </div>
+                <div class="pharmacy-body">
+                    <span class="pharmacy-category-tag">Express Delivery</span>
+                    <h3 class="pharmacy-name">CarePlus Express</h3>
+                    <p class="pharmacy-info-row"><i class="fa-solid fa-location-dot"></i> North Plaza</p>
+                    
+                    <div class="services-chips">
+                        <span class="service-chip">Skincare Products</span>
+                        <span class="service-chip">First Aid Kits</span>
+                        <span class="service-chip">Vitamins</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 10 PM</span>
+                    <div class="action-buttons">
+                        <a href="tel:+15550198421" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+                        <a href="https://maps.google.com/?q=CarePlus+Express+North+Plaza" target="_blank" class="btn-action btn-map"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results message node -->
+            <div id="noResults" class="no-results">
+                <i class="fa-solid fa-pills" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                <p>No pharmacies or medical stores found matching your search.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Filter Functionality -->
+    <script>
+        let currentCategory = 'all';
+
+        function filterPharmacies() {
+            const query = document.getElementById('pharmacySearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.pharmacy-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-name');
+                const category = card.getAttribute('data-category');
+                
+                const matchesSearch = searchData.includes(query);
+                const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active state on tag buttons
+            document.querySelectorAll('.specialty-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            filterPharmacies();
+        }
+
+        // Live input search listener
+        document.getElementById('pharmacySearch').addEventListener('input', filterPharmacies);
+    </script>
+</body>
+</html>

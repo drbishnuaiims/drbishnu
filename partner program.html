@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediNetwork - Provider Onboarding</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0077b6;
+            --primary-dark: #03045e;
+            --secondary: #00b4d8;
+            --light: #caf0f8;
+            --bg-color: #f4f7f6;
+            --text-color: #2b2d42;
+            --white: #ffffff;
+            --gray: #8d99ae;
+            --success: #2ec4b6;
+            --shadow: 0 10px 30px rgba(0, 119, 182, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 4rem;
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+        }
+
+        /* Hero Sub-Header */
+        .onboard-hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .onboard-hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .onboard-hero p {
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        /* Main Form Container */
+        .onboard-container {
+            max-width: 800px;
+            margin: -30px auto 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Category Select Grid */
+        .category-select-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .category-card i {
+            font-size: 1.8rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .category-card span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .category-card:hover, .category-card.selected {
+            border-color: var(--primary);
+            background: rgba(0, 119, 182, 0.03);
+            transform: translateY(-3px);
+        }
+
+        .category-card.selected i, .category-card.selected span {
+            color: var(--primary);
+        }
+
+        /* Form Sections */
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        /* Payment Section */
+        .plan-box {
+            border: 2px solid var(--primary);
+            background: rgba(0, 119, 182, 0.02);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-details h4 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .plan-details p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .plan-price span {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 400;
+            display: block;
+            text-align: right;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pay-option {
+            flex: 1;
+            border: 1px solid #cbd5e1;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .pay-option input {
+            margin-right: 6px;
+        }
+
+        .pay-option.selected {
+            border-color: var(--primary);
+            background: rgba(0, 119, 182, 0.05);
+            color: var(--primary-dark);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Responsive Layout */
+        @media(max-width: 768px) {
+            nav ul { display: none; }
+            .category-select-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-grid { grid-template-columns: 1fr; }
+            .onboard-container { margin: -20px 15px 0 15px; padding: 1.5rem; }
+            .plan-box { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .payment-methods { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-notes-medical"></i> MediNetwork
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="clinics.html">Clinics</a></li>
+                <li><a href="pharmacies.html">Pharmacies</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="#" class="btn" style="background:var(--primary); color:white; padding:0.5rem 1.2rem; border-radius:50px; text-decoration:none; font-weight:500;">Support</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="onboard-hero">
+        <h1>Join MediNetwork Partner Program</h1>
+        <p>Register your practice, expand your patient reach, and manage appointments seamlessly.</p>
+    </section>
+
+    <!-- Main Container -->
+    <div class="onboard-container">
+        
+        <!-- Step 1: Category Selection -->
+        <div class="step-title"><i class="fa-solid fa-1"></i> Select Your Provider Type</div>
+        
+        <div class="category-select-grid">
+            <div class="category-card selected" onclick="selectCategory('doctor', this)">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Doctor</span>
+            </div>
+            <div class="category-card" onclick="selectCategory('hospital', this)">
+                <i class="fa-solid fa-hospital"></i>
+                <span>Hospital</span>
+            </div>
+            <div class="category-card" onclick="selectCategory('clinic', this)">
+                <i class="fa-solid fa-stethoscope"></i>
+                <span>Clinic</span>
+            </div>
+            <div class="category-card" onclick="selectCategory('pharmacy', this)">
+                <i class="fa-solid fa-pills"></i>
+                <span>Pharmacy</span>
+            </div>
+        </div>
+
+        <form id="onboardForm" onsubmit="handleOnboardSubmit(event)">
+            
+            <!-- COMMON FIELDS (Name & Contact) -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name / Establishment Name</label>
+                    <input type="text" required placeholder="e.g. Dr. John Doe or City General">
+                </div>
+                <div class="form-group">
+                    <label>Official Email Address</label>
+                    <input type="email" required placeholder="partner@medinetwork.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label>City / Location</label>
+                    <input type="text" required placeholder="e.g. Downtown, Metropolis">
+                </div>
+            </div>
+
+            <!-- DYNAMIC QUESTIONS BASED ON CATEGORY -->
+            
+            <!-- 1. DOCTOR SPECIFIC QUESTIONS -->
+            <div id="section-doctor" class="form-section active">
+                <div class="step-title"><i class="fa-solid fa-2"></i> Professional Credentials (Doctor)</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Specialty</label>
+                        <select>
+                            <option>Cardiologist</option>
+                            <option>Neurologist</option>
+                            <option>Pediatrician</option>
+                            <option>Dermatologist</option>
+                            <option>Orthopedic Surgeon</option>
+                            <option>General Practitioner</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Medical License Number</label>
+                        <input type="text" placeholder="License #REG-987654">
+                    </div>
+                    <div class="form-group">
+                        <label>Years of Experience</label>
+                        <input type="number" placeholder="e.g. 10">
+                    </div>
+                    <div class="form-group">
+                        <label>Consultation Fee ($ USD)</label>
+                        <input type="number" placeholder="e.g. 120">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. HOSPITAL SPECIFIC QUESTIONS -->
+            <div id="section-hospital" class="form-section">
+                <div class="step-title"><i class="fa-solid fa-2"></i> Facility Details (Hospital)</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Total Bed Capacity</label>
+                        <input type="number" placeholder="e.g. 250">
+                    </div>
+                    <div class="form-group">
+                        <label>Emergency Service Available?</label>
+                        <select>
+                            <option>Yes, 24/7 Trauma Center</option>
+                            <option>Standard Emergency Only</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Key Specializations Offered</label>
+                        <input type="text" placeholder="e.g. Cardiology, Oncology, Neurology, Pediatrics">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. CLINIC SPECIFIC QUESTIONS -->
+            <div id="section-clinic" class="form-section">
+                <div class="step-title"><i class="fa-solid fa-2"></i> Clinic Specifications</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Clinic Type / Focus</label>
+                        <select>
+                            <option>Dental Care Center</option>
+                            <option>Skin & Dermatology Clinic</option>
+                            <option>Orthopedic & Physiotherapy</option>
+                            <option>Mental Wellness Hub</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Operating Rooms / Suites</label>
+                        <input type="number" placeholder="e.g. 4">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>List Core Procedures/Services Offered</label>
+                        <input type="text" placeholder="e.g. Root canal, Braces, Teeth whitening">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. PHARMACY SPECIFIC QUESTIONS -->
+            <div id="section-pharmacy" class="form-section">
+                <div class="step-title"><i class="fa-solid fa-2"></i> Pharmacy Specifications</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Operational Hours</label>
+                        <select>
+                            <option>24/7 Round the Clock</option>
+                            <option>8:00 AM - 11:00 PM</option>
+                            <option>9:00 AM - 9:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Home Delivery Service</label>
+                        <select>
+                            <option>Available (Express 30-Min)</option>
+                            <option>Available (Same Day)</option>
+                            <option>Store Pickup Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Drugstore License Number</label>
+                        <input type="text" placeholder="License #PH-554433">
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- STEP 3: PAYMENT SECTION -->
+            <div class="step-title"><i class="fa-solid fa-3"></i> Partner Membership Plan & Payment</div>
+            
+            <div class="plan-box">
+                <div class="plan-details">
+                    <h4>MediNetwork Verified Professional Tier</h4>
+                    <p>Includes high-priority search listing, booking panel dashboard, and 24/7 technical support.</p>
+                </div>
+                <div class="plan-price">
+                    $49.00
+                    <span>billed monthly</span>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <label class="pay-option selected" onclick="selectPayment(this)">
+                    <input type="radio" name="payment" checked> Credit / Debit Card
+                </label>
+                <label class="pay-option" onclick="selectPayment(this)">
+                    <input type="radio" name="payment"> PayPal Business
+                </label>
+                <label class="pay-option" onclick="selectPayment(this)">
+                    <input type="radio" name="payment"> Direct Bank Transfer
+                </label>
+            </div>
+
+            <div class="form-grid" id="cardDetailsContainer">
+                <div class="form-group full-width">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="4532 •••• •••• 8890">
+                </div>
+                <div class="form-group">
+                    <label>Expiration Date</label>
+                    <input type="text" placeholder="MM / YY">
+                </div>
+                <div class="form-group">
+                    <label>CVV Security Code</label>
+                    <input type="password" placeholder="123" maxlength="4">
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <button type="submit" class="submit-btn"><i class="fa-solid fa-lock"></i> Complete Registration & Pay</button>
+
+        </form>
+    </div>
+
+    <!-- Script to handle switching dynamic views -->
+    <script>
+        function selectCategory(category, element) {
+            // Highlight selected card
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+
+            // Toggle form sections
+            document.querySelectorAll('.form-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById('section-' + category).classList.add('active');
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.pay-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        function handleOnboardSubmit(event) {
+            event.preventDefault();
+            alert('Registration and payment simulation successful! Welcome to the MediNetwork provider family.');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediNetwork - Specialized Clinics</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0077b6;
+            --primary-dark: #03045e;
+            --secondary: #00b4d8;
+            --light: #caf0f8;
+            --bg-color: #f4f7f6;
+            --text-color: #2b2d42;
+            --white: #ffffff;
+            --gray: #8d99ae;
+            --success: #2ec4b6;
+            --shadow: 0 10px 30px rgba(0, 119, 182, 0.08);
+            --card-hover-shadow: 0 15px 35px rgba(0, 180, 216, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .header-actions .btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .header-actions .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero Sub-Header */
+        .clinics-hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .clinics-hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .clinics-hero p {
+            color: var(--light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Search Bar */
+        .filter-container {
+            max-width: 900px;
+            margin: -20px auto 2rem auto;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+
+        /* Category Filter Pills */
+        .filter-tags-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            max-width: 1200px;
+            margin: 0 auto 2.5rem auto;
+            padding: 0 5% 10px 5%;
+            scrollbar-width: thin;
+        }
+
+        .specialty-tag {
+            background: var(--white);
+            border: 1px solid #ddd;
+            color: var(--text-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .specialty-tag:hover, .specialty-tag.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container & Grid */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto 4rem auto;
+            padding: 0 5%;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .clinics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Detailed Clinic Card Design */
+        .clinic-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .clinic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .clinic-img-wrapper {
+            height: 180px;
+            position: relative;
+            width: 100%;
+        }
+
+        .clinic-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rating-overlay {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #f39c12;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .clinic-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .clinic-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .clinic-category-tag {
+            font-size: 0.75rem;
+            background: var(--light);
+            color: var(--primary-dark);
+            padding: 3px 10px;
+            border-radius: 6px;
+            width: fit-content;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .clinic-info-row {
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clinic-info-row i {
+            color: var(--secondary);
+            width: 16px;
+        }
+
+        /* Services Chips Section */
+        .services-section {
+            margin-top: 5px;
+        }
+
+        .services-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .services-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .service-chip {
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background: #fafafa;
+            border-top: 1px solid #edf2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timing-info {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .book-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .book-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* No Results State */
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            grid-column: 1 / -1;
+            display: none;
+            color: var(--gray);
+        }
+
+        /* Responsive Layout */
+        @media(max-width: 768px) {
+            nav ul { display: none; }
+            .filter-container { margin: -10px 15px 1.5rem 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-notes-medical"></i> MediNetwork
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="#">Hospitals</a></li>
+                <li><a href="clinics.html" class="active">Clinics</a></li>
+                <li><a href="#">Pharmacies</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="#" class="btn">Sign In</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="clinics-hero">
+        <h1>Specialized Health Clinics</h1>
+        <p>Explore specialized care centers, check available procedures, and book your appointments.</p>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="filter-container">
+        <i class="fa-solid fa-search" style="color: var(--gray); margin-left: 10px;"></i>
+        <input type="text" id="clinicSearch" placeholder="Search clinic name, location, or specific service...">
+    </div>
+
+    <!-- Category Filter Pills -->
+    <div class="filter-tags-scroll">
+        <button class="specialty-tag active" onclick="filterBySpecialty('all')">All Clinics</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('dental')">Dental Care</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('dermatology')">Dermatology</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('orthopedic')">Orthopedic</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('pediatric')">Pediatric</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('eye')">Eye Care</button>
+        <button class="specialty-tag" onclick="filterBySpecialty('wellness')">Mental Wellness</button>
+    </div>
+
+    <!-- Main Grid Container -->
+    <div class="container">
+        <h2 class="section-title"><i class="fa-solid fa-stethoscope"></i> Verified Health Clinics</h2>
+        
+        <div class="clinics-grid" id="clinicsGrid">
+            
+            <!-- Clinic 1 -->
+            <div class="clinic-card" data-specialty="dental" data-name="purity dental care clinic north plaza teeth whitening braces root canal">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Dental Care</span>
+                    <h3 class="clinic-name">Purity Dental Clinic</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> North Plaza, Suite 402</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. Amanda Green</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Teeth Whitening</span>
+                            <span class="service-chip">Root Canal</span>
+                            <span class="service-chip">Braces</span>
+                            <span class="service-chip">Dental Implants</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 8 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- Clinic 2 -->
+            <div class="clinic-card" data-specialty="dermatology" data-name="glow skin & hair dermatology clinic baker street acne laser anti aging">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.6</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Dermatology</span>
+                    <h3 class="clinic-name">Glow Skin & Hair Clinic</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> Baker Street, Block B</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. David Smith</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Acne Treatment</span>
+                            <span class="service-chip">Laser Hair Removal</span>
+                            <span class="service-chip">Anti-Aging Facials</span>
+                            <span class="service-chip">Hair Loss Therapy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 7 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- Clinic 3 -->
+            <div class="clinic-card" data-specialty="orthopedic" data-name="joint care orthopedic clinic westside highway physical therapy joint replacement spine care">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Orthopedic Care</span>
+                    <h3 class="clinic-name">Joint Care Orthopedic Clinic</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> Westside Highway</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. Brian Martinez</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Physical Therapy</span>
+                            <span class="service-chip">Joint Replacement</span>
+                            <span class="service-chip">Spine Care</span>
+                            <span class="service-chip">Sports Injury Rehab</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 6 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- Clinic 4 -->
+            <div class="clinic-card" data-specialty="pediatric" data-name="kids care pediatric clinic downtown avenue vaccination growth monitoring newborn care">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 5.0</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Pediatric Care</span>
+                    <h3 class="clinic-name">Kids Care Clinic</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> Downtown Avenue</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. Emily Roberts</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Vaccination & Immunization</span>
+                            <span class="service-chip">Growth Monitoring</span>
+                            <span class="service-chip">Newborn Care</span>
+                            <span class="service-chip">Nutrition Counseling</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 5 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- Clinic 5 -->
+            <div class="clinic-card" data-specialty="eye" data-name="clear view eye care clinic east end road laser vision testing cataract screening">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.7</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Ophthalmology</span>
+                    <h3 class="clinic-name">Clear View Eye Care</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> East End Road</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. Nancy Clark</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Vision Testing</span>
+                            <span class="service-chip">Laser Correction</span>
+                            <span class="service-chip">Cataract Screening</span>
+                            <span class="service-chip">Glaucoma Treatment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 7 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- Clinic 6 -->
+            <div class="clinic-card" data-specialty="wellness" data-name="serenity wellness clinic park street mental health counseling stress management therapy">
+                <div class="clinic-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1527613426441-2da1747f766d?auto=format&fit=crop&w=500&q=80" alt="Clinic">
+                    <div class="rating-overlay"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="clinic-body">
+                    <span class="clinic-category-tag">Mental Wellness</span>
+                    <h3 class="clinic-name">Serenity Wellness Center</h3>
+                    <p class="clinic-info-row"><i class="fa-solid fa-location-dot"></i> Park Street, Floor 3</p>
+                    <p class="clinic-info-row"><i class="fa-solid fa-user-doctor"></i> Lead: Dr. William Brown</p>
+                    
+                    <div class="services-section">
+                        <div class="services-title">Services Available</div>
+                        <div class="services-chips">
+                            <span class="service-chip">Mental Health Counseling</span>
+                            <span class="service-chip">Stress Management</span>
+                            <span class="service-chip">Cognitive Therapy</span>
+                            <span class="service-chip">Couple Therapy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="timing-info"><i class="fa-solid fa-circle-dot"></i> Open • Closes 9 PM</span>
+                    <a href="#" class="book-btn">Book Slot</a>
+                </div>
+            </div>
+
+            <!-- No Results message node -->
+            <div id="noResults" class="no-results">
+                <i class="fa-solid fa-hospital-user" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                <p>No health clinics found matching your search.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Filter Functionality -->
+    <script>
+        let currentSpecialty = 'all';
+
+        function filterClinics() {
+            const query = document.getElementById('clinicSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.clinic-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-name');
+                const specialty = card.getAttribute('data-specialty');
+                
+                const matchesSearch = searchData.includes(query);
+                const matchesSpecialty = (currentSpecialty === 'all' || specialty === currentSpecialty);
+
+                if (matchesSearch && matchesSpecialty) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        function filterBySpecialty(specialty) {
+            currentSpecialty = specialty;
+            
+            // Update active state on tag buttons
+            document.querySelectorAll('.specialty-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            filterClinics();
+        }
+
+        // Live input search listener
+        document.getElementById('clinicSearch').addEventListener('input', filterClinics);
+    </script>
+</body>
+</html>
