@@ -1,570 +1,542 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediNetwork - Healthcare Aggregator</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #0077b6;
-            --primary-dark: #03045e;
-            --secondary: #00b4d8;
-            --light: #caf0f8;
-            --bg-color: #f8f9fa;
-            --text-color: #333333;
-            --white: #ffffff;
-            --gray: #6c757d;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dr Bishnu Prasad Sahoo — psychiatrist, entrepreneur and healthcare growth partner for psychiatrists building trusted digital practices worldwide.">
+<title>Dr Bishnu Prasad Sahoo | Psychiatry × Entrepreneurship</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+<style>
+:root{
+  --teal:#00665C;
+  --teal-dark:#004f49;
+  --lime:#A8C82A;
+  --navy:#071B2B;
+  --ink:#263238;
+  --muted:#657176;
+  --line:#dfe6e3;
+  --soft:#f5f8f6;
+  --white:#fff;
+  --shadow:0 18px 55px rgba(7,27,43,.10);
+  --radius:24px;
+  --ease:cubic-bezier(.2,.75,.25,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:#fbfcfb;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--lime);width:0;z-index:9999}
+.blob{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
+.blob.one{width:420px;height:420px;background:rgba(168,200,42,.13);right:-160px;top:50px}
+.blob.two{width:300px;height:300px;background:rgba(0,102,92,.08);left:-180px;top:650px}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  background:rgba(251,252,251,.78);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(223,230,227,.7);
+  transition:.35s var(--ease);
+}
+.nav.scrolled{box-shadow:0 8px 30px rgba(7,27,43,.06)}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;color:var(--navy);letter-spacing:-.02em}
+.brand-mark{display:flex;gap:3px;align-items:center}
+.brand-mark i{display:block;width:9px;height:20px;background:var(--lime);border-radius:7px 3px 3px 7px}
+.brand-mark i:last-child{width:7px;border-radius:2px 7px 7px 2px}
+.nav-links{display:flex;gap:25px;font-size:14px;font-weight:700;color:#536066}
+.nav-links a{transition:.2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{
+  background:var(--teal);color:white;padding:11px 18px;border-radius:999px;
+  font-size:14px;font-weight:800;box-shadow:0 8px 22px rgba(0,102,92,.18)
+}
+.menu{display:none;border:0;background:none;font-size:25px;color:var(--navy)}
 
-        /* Header Styling */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-        }
+/* HERO */
+.hero{min-height:100vh;padding:150px 0 85px;position:relative;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:70px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;color:var(--teal);
+  font-size:13px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+  margin-bottom:20px
+}
+.eyebrow:before{content:"";width:30px;height:2px;background:var(--lime)}
+.hero h1{
+  font-size:clamp(48px,6.5vw,82px);line-height:.94;letter-spacing:-.065em;
+  color:var(--navy);margin:0 0 25px;font-weight:900
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero-lead{font-size:20px;line-height:1.55;color:#4d5b60;max-width:700px}
+.hero-lead strong{color:var(--navy)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 21px;border-radius:999px;font-weight:850;font-size:15px;
+  transition:.25s var(--ease);border:1px solid transparent
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:var(--teal);color:white;box-shadow:0 12px 28px rgba(0,102,92,.2)}
+.btn-secondary{background:white;border-color:var(--line);color:var(--navy)}
+.micro{font-size:12px;color:var(--muted);margin-top:13px}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* HERO CARD */
+.profile-stage{position:relative;min-height:510px;display:grid;place-items:center}
+.photo-ring{
+  width:min(390px,80vw);aspect-ratio:1;border-radius:50%;
+  padding:12px;background:linear-gradient(145deg,#fff,#edf2ef);
+  box-shadow:0 35px 80px rgba(0,80,70,.16);position:relative;z-index:2
+}
+.photo-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.float-card{
+  position:absolute;z-index:3;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);
+  box-shadow:var(--shadow);border-radius:18px;padding:17px 18px
+}
+.float-card strong{display:block;color:var(--navy);font-size:16px}
+.float-card span{font-size:12px;color:var(--muted)}
+.card-a{left:0;top:90px}.card-b{right:-5px;bottom:95px}
+.orbit{
+  position:absolute;width:470px;height:470px;border:1px dashed rgba(0,102,92,.20);
+  border-radius:50%;animation:spin 22s linear infinite
+}
+.orbit:after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:var(--lime);top:18px;left:50%}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-        .logo i {
-            color: var(--secondary);
-        }
+/* SECTIONS */
+section.block{padding:105px 0}
+.section-head{max-width:760px;margin-bottom:42px}
+.kicker{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:900;margin-bottom:9px}
+.section-head h2{font-size:clamp(36px,5vw,58px);line-height:1;letter-spacing:-.05em;color:var(--navy);margin:0 0 16px}
+.section-head h2 span{color:var(--teal)}
+.section-head p{font-size:17px;color:var(--muted);margin:0}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+/* POSITIONING */
+.positioning{
+  background:var(--navy);color:white;position:relative;overflow:hidden
+}
+.positioning:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-220px;top:-240px;background:rgba(168,200,42,.11)}
+.positioning .section-head h2{color:white}
+.positioning .section-head p{color:rgba(255,255,255,.72)}
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promise{
+  padding:28px;border:1px solid rgba(255,255,255,.12);border-radius:20px;
+  background:rgba(255,255,255,.045);transition:.3s var(--ease)
+}
+.promise:hover{transform:translateY(-7px);background:rgba(255,255,255,.08)}
+.promise-no{color:var(--lime);font-weight:900;font-size:13px;margin-bottom:20px}
+.promise h3{font-size:22px;margin:0 0 9px}
+.promise p{margin:0;color:rgba(255,255,255,.67);font-size:15px}
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.stat{background:white;padding:30px 20px;text-align:center}
+.stat strong{display:block;font-size:38px;letter-spacing:-.05em;color:var(--teal);line-height:1}
+.stat span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);display:block;margin-top:10px}
 
-        nav ul li a:hover, nav ul li a.active {
-            color: var(--primary);
-        }
+/* STORY */
+.story-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
+.story-callout{background:var(--soft);border-left:5px solid var(--lime);border-radius:18px;padding:28px;position:sticky;top:100px}
+.story-callout h3{color:var(--navy);font-size:24px;margin:0 0 10px}
+.story-callout p{color:var(--muted);margin:0}
+.story-copy p{font-size:17px;color:#455257}
+.story-copy p:first-child{font-size:21px;color:var(--navy);font-weight:650}
+.timeline{margin-top:35px;border-left:1px solid var(--line);padding-left:25px}
+.timeline-item{position:relative;padding:0 0 28px}
+.timeline-item:before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:var(--lime);left:-31px;top:8px;box-shadow:0 0 0 5px #fbfcfb}
+.timeline-year{font-size:12px;color:var(--teal);font-weight:900;letter-spacing:.08em}
+.timeline h3{margin:4px 0 5px;color:var(--navy);font-size:20px}
+.timeline p{margin:0;color:var(--muted);font-size:14px}
 
-        .header-actions .btn {
-            background: var(--primary);
-            color: var(--white);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
+/* WORK CARDS */
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.work{
+  min-height:220px;padding:28px;border:1px solid var(--line);border-radius:20px;background:white;
+  transition:.3s var(--ease);position:relative;overflow:hidden
+}
+.work:after{content:"↗";position:absolute;right:22px;top:18px;color:#bdc8c5;font-size:24px}
+.work:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:#c9d8d3}
+.work .year{font-size:12px;color:var(--teal);font-weight:900}
+.work h3{font-size:25px;letter-spacing:-.03em;color:var(--navy);margin:10px 0 9px}
+.work p{margin:0;color:var(--muted);font-size:14px;max-width:90%}
+.badge{display:inline-block;margin-top:17px;background:#eef4ef;color:var(--teal);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:850}
 
-        .header-actions .btn:hover {
-            background: var(--primary-dark);
-        }
+/* ECOSYSTEM */
+.ecosystem{background:var(--soft)}
+.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.eco-card{padding:30px;border-radius:22px;background:white;border:1px solid var(--line)}
+.eco-card h3{font-size:23px;color:var(--navy);margin:0 0 15px}
+.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tag{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fbfcfb;font-size:13px;font-weight:750;color:#46555a}
 
-        /* Hero Section with Search */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            color: var(--white);
-            text-align: center;
-            padding: 4rem 1rem 5rem 1rem;
-        }
+/* BUSINESS CTA */
+.cta{
+  background:linear-gradient(120deg,var(--teal),var(--teal-dark));color:white;
+  border-radius:28px;padding:60px;position:relative;overflow:hidden
+}
+.cta:after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-100px;bottom:-190px;background:rgba(168,200,42,.2)}
+.cta-content{position:relative;z-index:2;max-width:800px}
+.cta .kicker{color:var(--lime)}
+.cta h2{font-size:clamp(38px,5vw,60px);line-height:.98;letter-spacing:-.05em;margin:0 0 17px}
+.cta p{font-size:18px;color:rgba(255,255,255,.8);max-width:700px}
+.btn-lime{background:var(--lime);color:var(--navy);box-shadow:0 12px 28px rgba(0,0,0,.14)}
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
+/* FOOTER */
+footer{padding:45px 0 30px;border-top:1px solid var(--line)}
+.footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}
+.footer-note{font-size:12px;color:var(--muted)}
+.footer-links{display:flex;gap:18px;font-size:13px;font-weight:750;color:var(--muted)}
 
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            color: var(--light);
-        }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
 
-        .search-container {
-            max-width: 650px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .search-bar {
-            display: flex;
-            background: var(--white);
-            border-radius: 50px;
-            padding: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .search-bar input {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 50px;
-        }
-
-        .search-bar button {
-            background: var(--secondary);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .search-bar button:hover {
-            background: var(--primary);
-        }
-
-        /* Main Content & Categories */
-        .main-container {
-            max-width: 1200px;
-            margin: -2rem auto 3rem auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .category-section {
-            margin-bottom: 3rem;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2 {
-            font-size: 1.5rem;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-header h2 i {
-            color: var(--secondary);
-        }
-
-        /* Horizontal Scrolling Cards Container */
-        .cards-wrapper {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            scroll-behavior: smooth;
-        }
-
-        .cards-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .cards-wrapper::-webkit-scrollbar-track {
-            background: #e0e0e0;
-            border-radius: 4px;
-        }
-
-        .cards-wrapper::-webkit-scrollbar-thumb {
-            background: var(--secondary);
-            border-radius: 4px;
-        }
-
-        /* Card Design */
-        .card {
-            min-width: 280px;
-            max-width: 280px;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            flex-shrink: 0;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-
-        .card-img {
-            height: 150px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex-grow: 1;
-        }
-
-        .card-tag {
-            font-size: 0.75rem;
-            background: var(--light);
-            color: var(--primary-dark);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            width: fit-content;
-            font-weight: 600;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .card-info {
-            font-size: 0.85rem;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 0.8rem;
-            border-top: 1px solid #eee;
-        }
-
-        .rating {
-            color: #f39c12;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .card-btn {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: background 0.2s;
-        }
-
-        .card-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        /* No results indicator */
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            color: var(--gray);
-            font-size: 1.2rem;
-            display: none;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .search-bar {
-                flex-direction: column;
-                background: transparent;
-                box-shadow: none;
-            }
-            .search-bar input {
-                background: var(--white);
-                border-radius: 50px;
-                margin-bottom: 0.5rem;
-            }
-            .search-bar button {
-                border-radius: 50px;
-                padding: 0.8rem;
-            }
-        }
-    </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links,.nav-cta{display:none}.menu{display:block}
+  .nav.open .nav-links{
+    display:flex;position:absolute;top:76px;left:0;width:100%;background:white;
+    padding:20px;flex-direction:column;box-shadow:0 20px 30px rgba(7,27,43,.08)
+  }
+  .hero{padding-top:125px}.hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero{text-align:center}.eyebrow{justify-content:center}.hero-lead{margin:auto}.actions{justify-content:center}
+  .profile-stage{min-height:430px}.orbit{width:390px;height:390px}.photo-ring{width:300px}
+  .card-a{left:3%}.card-b{right:3%}
+  .promise-grid,.stats{grid-template-columns:repeat(2,1fr)}
+  .story-grid{grid-template-columns:1fr;gap:30px}.story-callout{position:static}
+  .eco-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .container{width:min(100% - 28px,1180px)}
+  section.block{padding:75px 0}
+  .hero h1{font-size:49px}.hero-lead{font-size:17px}
+  .profile-stage{min-height:360px}.orbit{width:310px;height:310px}.photo-ring{width:245px}
+  .float-card{padding:12px 13px}.float-card strong{font-size:13px}.float-card span{font-size:10px}
+  .card-a{top:35px}.card-b{bottom:40px}
+  .promise-grid,.stats,.work-grid{grid-template-columns:1fr}
+  .cta{padding:38px 25px}
+  .footer-grid{flex-direction:column;align-items:flex-start}
+  .footer-links{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+  *,html{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
+
 <body>
+<div class="progress" id="progress"></div>
 
-    <!-- Header Section -->
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-notes-medical"></i> MediNetwork
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Doctors</a></li>
-                <li><a href="#">Hospitals</a></li>
-                <li><a href="#">Clinics</a></li>
-                <li><a href="#">Pharmacies</a></li>
-            </ul>
-        </nav>
-        <div class="header-actions">
-            <a href="#" class="btn">Sign In</a>
-        </div>
-    </header>
-
-    <!-- Hero Section with Search -->
-    <section class="hero">
-        <h1>Your Health, Our Network</h1>
-        <p>Find top-rated doctors, premier hospitals, specialized clinics, and 24/7 pharmacies near you.</p>
-        <div class="search-container">
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search doctors, hospitals, clinics, or pharmacies...">
-                <button onclick="filterServices()"><i class="fa-solid fa-search"></i> Search</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content Area with Categorized Horizontal Scrollable Cards -->
-    <div class="main-container">
-        
-        <div id="noResults" class="no-results">
-            <i class="fa-solid fa-face-frown" style="font-size: 3rem; margin-bottom: 10px;"></i>
-            <p>No healthcare services found matching your search.</p>
-        </div>
-
-        <!-- Doctors Section -->
-        <div class="category-section" data-category="doctor">
-            <div class="section-header">
-                <h2><i class="fa-solid fa-user-doctor"></i> Top Doctors</h2>
-            </div>
-            <div class="cards-wrapper">
-                <!-- Card 1 -->
-                <div class="card" data-name="dr. Sarah Johnson cardiologist">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80" alt="Doctor" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Cardiologist</span>
-                        <h3 class="card-title">Dr. Sarah Johnson</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> City Heart Center</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
-                            <button class="card-btn">Book Visit</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card" data-name="dr. Michael Chen neurologist">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=80" alt="Doctor" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Neurologist</span>
-                        <h3 class="card-title">Dr. Michael Chen</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Metro Medical Hub</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.8</span>
-                            <button class="card-btn">Book Visit</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="card" data-name="dr. Emily Roberts pediatrician">
-                    <img src="https://images.unsplash.com/photo-1594824813567-463870624d77?auto=format&fit=crop&w=500&q=80" alt="Doctor" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Pediatrician</span>
-                        <h3 class="card-title">Dr. Emily Roberts</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Kids Care Clinic</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 5.0</span>
-                            <button class="card-btn">Book Visit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hospitals Section -->
-        <div class="category-section" data-category="hospital">
-            <div class="section-header">
-                <h2><i class="fa-solid fa-hospital"></i> Featured Hospitals</h2>
-            </div>
-            <div class="cards-wrapper">
-                <!-- Card 1 -->
-                <div class="card" data-name="st. Jude General hospital emergency">
-                    <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=500&q=80" alt="Hospital" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Multi-Specialty</span>
-                        <h3 class="card-title">St. Jude General Hospital</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Downtown Avenue</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.7</span>
-                            <button class="card-btn">View Details</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card" data-name="apex health institute hospital trauma">
-                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=500&q=80" alt="Hospital" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Trauma Center</span>
-                        <h3 class="card-title">Apex Health Institute</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Westside Highway</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
-                            <button class="card-btn">View Details</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Clinics Section -->
-        <div class="category-section" data-category="clinic">
-            <div class="section-header">
-                <h2><i class="fa-solid fa-stethoscope"></i> Specialized Clinics</h2>
-            </div>
-            <div class="cards-wrapper">
-                <!-- Card 1 -->
-                <div class="card" data-name="purity dental care clinic">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=500&q=80" alt="Clinic" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Dental Care</span>
-                        <h3 class="card-title">Purity Dental Clinic</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> North Plaza</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.8</span>
-                            <button class="card-btn">Book Appointment</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card" data-name="glow skin dermatology clinic">
-                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80" alt="Clinic" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Dermatology</span>
-                        <h3 class="card-title">Glow Skin & Hair Clinic</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Baker Street</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.6</span>
-                            <button class="card-btn">Book Appointment</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pharmacies Section -->
-        <div class="category-section" data-category="pharmacy">
-            <div class="section-header">
-                <h2><i class="fa-solid fa-pills"></i> 24/7 Pharmacies</h2>
-            </div>
-            <div class="cards-wrapper">
-                <!-- Card 1 -->
-                <div class="card" data-name="medplus 24/7 pharmacy medicine">
-                    <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=500&q=80" alt="Pharmacy" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Open 24 Hours</span>
-                        <h3 class="card-title">MedPlus Pharmacy</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> Central Market</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
-                            <button class="card-btn">Order Meds</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card" data-name="healthfirst drugstore pharmacy medicine">
-                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=500&q=80" alt="Pharmacy" class="card-img">
-                    <div class="card-body">
-                        <span class="card-tag">Express Delivery</span>
-                        <h3 class="card-title">HealthFirst Drugstore</h3>
-                        <p class="card-info"><i class="fa-solid fa-location-dot"></i> East End Road</p>
-                        <div class="card-footer">
-                            <span class="rating"><i class="fa-solid fa-star"></i> 4.7</span>
-                            <button class="card-btn">Order Meds</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Dr Bishnu Prasad Sahoo">
+      <span class="brand-mark"><i></i><i></i></span>
+      <span>Bishnu Prasad Sahoo</span>
+    </a>
+    <div class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#work">Ventures</a>
+      <a href="#network">Network</a>
+      <a href="#mission">Mission</a>
     </div>
+    <a class="nav-cta" href="#connect">Work with me ↗</a>
+    <button class="menu" id="menu" aria-label="Open menu">☰</button>
+  </div>
+</nav>
 
-    <!-- JavaScript for Dynamic Live Search -->
-    <script>
-        function filterServices() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const sections = document.querySelectorAll('.category-section');
-            let totalVisibleCards = 0;
+<main id="top">
+  <div class="blob one"></div>
+  <div class="blob two"></div>
 
-            sections.forEach(section => {
-                const cards = section.querySelectorAll('.card');
-                let sectionHasVisibleCard = false;
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Psychiatrist · Entrepreneur · Builder</div>
+        <h1>Medicine with a<br><em>builder's mind.</em></h1>
+        <p class="hero-lead">
+          <strong>Dr Bishnu Prasad Sahoo</strong> brings together clinical psychiatry,
+          entrepreneurship and digital strategy to help psychiatrists build practices
+          that are <strong>credible, visible and genuinely discoverable</strong> in a crowded world.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#mission">See what I build ↗</a>
+          <a class="btn btn-secondary" href="#work">Explore my work</a>
+        </div>
+        <div class="micro">Psychiatrist trained at institutions of national importance · AIIMS & NIMHANS</div>
+      </div>
 
-                cards.forEach(card => {
-                    const searchData = card.getAttribute('data-name').toLowerCase();
-                    const cardTitle = card.querySelector('.card-title').innerText.toLowerCase();
-                    const cardTag = card.querySelector('.card-tag').innerText.toLowerCase();
+      <div class="profile-stage reveal">
+        <div class="orbit"></div>
+        <div class="float-card card-a">
+          <strong>20M+ lifespans</strong>
+          <span>across ventures & initiatives</span>
+        </div>
+        <div class="photo-ring">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIo_UbWyAjUGNhp2wkK3-1an4kB44Ev1shoAIJjx1G2H86djlc8ZpLzZp4GUw_jjOV4eH10omcxa6P-ak6ILORbudqa9CgiWeIozx_WwZP6U3CerdrQnNu39MSW6yBBRDJWs5m9vSxOEPs9cGaKI_6-xrqzh2KV5Q5lww0/s320/Screenshot%202026-09-09%20at%203.31.26%E2%80%AFPM.png" alt="Dr Bishnu Prasad Sahoo">
+        </div>
+        <div class="float-card card-b">
+          <strong>Psychiatry × Digital</strong>
+          <span>building the next generation of practice</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                    if (searchData.includes(query) || cardTitle.includes(query) || cardTag.includes(query)) {
-                        card.style.display = 'flex';
-                        sectionHasVisibleCard = true;
-                        totalVisibleCards++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+  <section class="block positioning">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">The positioning</div>
+        <h2>Psychiatrists don't need more noise.<br><span>They need to be found.</span></h2>
+        <p>
+          A strong clinical practice deserves a strong digital presence. My focus is the space
+          between excellent medicine and the modern patient journey.
+        </p>
+      </div>
+      <div class="promise-grid">
+        <article class="promise reveal">
+          <div class="promise-no">01 / VISIBILITY</div>
+          <h3>Be discoverable</h3>
+          <p>Build a professional digital identity that communicates expertise before the first appointment.</p>
+        </article>
+        <article class="promise reveal">
+          <div class="promise-no">02 / TRUST</div>
+          <h3>Turn attention into trust</h3>
+          <p>Translate qualifications, experience and philosophy into a patient-facing brand that feels credible.</p>
+        </article>
+        <article class="promise reveal">
+          <div class="promise-no">03 / GROWTH</div>
+          <h3>Grow the right practice</h3>
+          <p>Connect website, content, patient journeys and digital touchpoints into a coherent growth system.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-                // Hide the whole section if no cards inside match the query
-                if (sectionHasVisibleCard || query === "") {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
+  <section class="block">
+    <div class="container">
+      <div class="stats reveal">
+        <div class="stat"><strong data-count="20">0</strong><span>Million+ lifespans touched</span></div>
+        <div class="stat"><strong data-count="1.3">0</strong><span>Million StayBay users</span></div>
+        <div class="stat"><strong data-count="10">0</strong><span>Years of building</span></div>
+        <div class="stat"><strong data-count="7">0</strong><span>Selected ventures / initiatives</span></div>
+      </div>
+    </div>
+  </section>
 
-            // Show or hide the global "No Results" message
-            const noResultsEl = document.getElementById('noResults');
-            if (totalVisibleCards === 0 && query !== "") {
-                noResultsEl.style.display = 'block';
-            } else {
-                noResultsEl.style.display = 'none';
-            }
-        }
+  <section class="block" id="story">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Two worlds. One operating system.</div>
+        <h2>From building ventures to <span>building trust.</span></h2>
+      </div>
+      <div class="story-grid">
+        <aside class="story-callout reveal">
+          <h3>The unusual combination</h3>
+          <p>
+            Clinical training teaches you to understand people. Entrepreneurship teaches you
+            to understand systems. Digital practice sits at the intersection.
+          </p>
+        </aside>
+        <div class="story-copy reveal">
+          <p>
+            I am a psychiatrist by training and an entrepreneur by temperament. My work has
+            moved across healthcare, technology, education, consumer products and community initiatives.
+          </p>
+          <p>
+            That experience shaped a simple belief: great professionals should not remain invisible
+            simply because they were never taught how to present themselves online.
+          </p>
+          <p>
+            Today, I am particularly interested in helping psychiatrists and mental-health professionals
+            build a digital presence that is clinically credible, strategically positioned and designed
+            around how patients actually make decisions.
+          </p>
 
-        // Trigger search dynamically while typing
-        document.getElementById('searchInput').addEventListener('input', filterServices);
-    </script>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2015</div>
+              <h3>OpenEcell</h3>
+              <p>Early entrepreneurial work and ecosystem building.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2016 — 2019</div>
+              <h3>StayBay</h3>
+              <p>A platform that reached 1.3 million users and was recognized by the Department of Science & Technology, Government of India.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">ECOSYSTEM</div>
+              <h3>Innovation & founder networks</h3>
+              <p>Member, IIMC Innovation Park · Member, TiE Delhi · NASSCOM 10,000 Startups / Warehouse ecosystem.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">TODAY</div>
+              <h3>Psychiatry × practice building</h3>
+              <p>Combining clinical credibility with digital strategy to help psychiatrists become visible and grow sustainable practices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block ecosystem" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Selected work</div>
+        <h2>A decade of <span>experimentation.</span></h2>
+        <p>Projects across technology, hospitality, consumer products, health and community.</p>
+      </div>
+
+      <div class="work-grid">
+        <article class="work reveal"><div class="year">2015</div><h3>OpenEcell</h3><p>Entrepreneurial initiative from the early stage of the journey.</p><span class="badge">Entrepreneurship</span></article>
+        <article class="work reveal"><div class="year">2016 — 2019</div><h3>StayBay</h3><p>Built a platform that reached 1.3 million users and received DST Government of India recognition.</p><span class="badge">1.3M users · DST GoI</span></article>
+        <article class="work reveal"><div class="year">VENTURE</div><h3>BunkNow</h3><p>A consumer-facing venture exploring new ways of solving everyday user problems.</p><span class="badge">Consumer technology</span></article>
+        <article class="work reveal"><div class="year">VENTURE</div><h3>Acumen Toys</h3><p>Work in the consumer and learning-oriented product ecosystem.</p><span class="badge">Consumer products</span></article>
+        <article class="work reveal"><div class="year">VENTURE</div><h3>Salad Science</h3><p>An experiment at the intersection of food, wellness and consumer behaviour.</p><span class="badge">Wellness</span></article>
+        <article class="work reveal"><div class="year">INITIATIVE</div><h3>happyCycling.org</h3><p>A community-oriented initiative built around healthier, more active living.</p><span class="badge">Community</span></article>
+        <article class="work reveal"><div class="year">HEALTHCARE</div><h3>Thomson Clinic</h3><p>Building a modern psychiatric practice identity where clinical standards meet thoughtful digital communication.</p><span class="badge">Psychiatry · Digital</span></article>
+        <article class="work reveal"><div class="year">ACROSS PROJECTS</div><h3>20M+ lifespans touched</h3><p>A cumulative impact statement spanning the ventures and initiatives across this journey.</p><span class="badge">Impact</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="network">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Professional ecosystem</div>
+        <h2>Built around <span>people, institutions & ideas.</span></h2>
+      </div>
+      <div class="eco-grid">
+        <div class="eco-card reveal">
+          <h3>Institutional & founder ecosystem</h3>
+          <div class="tags">
+            <span class="tag">IIMC Innovation Park</span>
+            <span class="tag">TiE Delhi</span>
+            <span class="tag">NASSCOM 10,000</span>
+            <span class="tag">Department of Science & Technology, GoI</span>
+          </div>
+        </div>
+        <div class="eco-card reveal">
+          <h3>Clinical foundation</h3>
+          <div class="tags">
+            <span class="tag">AIIMS Bhubaneswar</span>
+            <span class="tag">NIMHANS Bengaluru</span>
+            <span class="tag">Psychiatry</span>
+            <span class="tag">Digital healthcare</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="mission">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">The mission</div>
+        <h2>Make excellent psychiatrists <span>impossible to overlook.</span></h2>
+        <p>
+          The opportunity is not to turn doctors into influencers. It is to make their real expertise
+          easier for the right patients to discover, understand and trust.
+        </p>
+      </div>
+
+      <div class="promise-grid" style="color:var(--ink)">
+        <article class="eco-card reveal"><div class="kicker">01 · POSITION</div><h3>Clarify the professional brand</h3><p>Define what a psychiatrist should be known for, who they serve and why a patient should choose them.</p></article>
+        <article class="eco-card reveal"><div class="kicker">02 · BUILD</div><h3>Create the digital front door</h3><p>Design a high-trust website and patient journey that makes expertise understandable without compromising medical professionalism.</p></article>
+        <article class="eco-card reveal"><div class="kicker">03 · GROW</div><h3>Build a repeatable growth engine</h3><p>Connect search visibility, content, conversion and patient experience into one coherent system.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="connect">
+    <div class="container">
+      <div class="cta reveal">
+        <div class="cta-content">
+          <div class="kicker">For psychiatrists worldwide</div>
+          <h2>Your clinical reputation deserves a digital presence that matches it.</h2>
+          <p>
+            If you are a psychiatrist who wants to become more visible, communicate your expertise
+            better and build a modern private practice, let's explore what that could look like.
+          </p>
+          <div class="actions">
+            <a class="btn btn-lime" href="mailto:hello@example.com">Start a conversation ↗</a>
+            <a class="btn" style="border-color:rgba(255,255,255,.25);color:white;background:rgba(255,255,255,.08)" href="#work">See the journey</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="brand"><span class="brand-mark"><i></i><i></i></span><span>Dr Bishnu Prasad Sahoo</span></div>
+      <div class="footer-note" style="margin-top:8px">Psychiatry · Entrepreneurship · Digital practice building</div>
+    </div>
+    <div class="footer-links">
+      <a href="#story">Story</a><a href="#work">Ventures</a><a href="#mission">Mission</a><a href="#connect">Connect</a>
+    </div>
+  </div>
+  <div class="container footer-note" style="margin-top:30px">
+    © 2026 Dr Bishnu Prasad Sahoo. Selected achievements and impact figures are presented as provided by the profile owner.
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+const progress = document.getElementById('progress');
+const menu = document.getElementById('menu');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (window.scrollY / max * 100) + '%';
+}, {passive:true});
+
+menu.addEventListener('click', () => nav.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click',()=>nav.classList.remove('open')));
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const counters = document.querySelectorAll('[data-count]');
+let counted = false;
+const statObserver = new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !counted){
+    counted = true;
+    counters.forEach(el=>{
+      const target = parseFloat(el.dataset.count);
+      const duration = 1200;
+      const start = performance.now();
+      const tick = now=>{
+        const p=Math.min((now-start)/duration,1);
+        const eased=1-Math.pow(1-p,3);
+        const value=target*eased;
+        el.textContent = target % 1 ? value.toFixed(1) : Math.round(value);
+        if(p<1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+},{threshold:.35});
+statObserver.observe(document.querySelector('.stats'));
+</script>
 </body>
 </html>
