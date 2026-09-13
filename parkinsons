@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parkinson’s Disease — Thursday Musing Clinical Pearls</title>
+<meta name="description" content="Interactive clinical learning page based on a Thursday Musing webinar on Parkinson's disease for psychiatrists.">
+<style>
+:root{
+  --bg:#f5faf8;--surface:#ffffff;--surface2:#edf7f3;--ink:#17312b;--muted:#5e756e;
+  --teal:#2f8f83;--teal2:#66b8aa;--sage:#9bc8b8;--mint:#dff1eb;--gold:#c9a35d;
+  --line:#dbe9e4;--shadow:0 18px 45px rgba(35,83,72,.10);--radius:22px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:radial-gradient(circle at 10% 0%,#e6f4ef 0,transparent 28%),linear-gradient(180deg,#f8fcfb 0,#f2f8f6 100%);
+color:var(--ink);line-height:1.65}
+a{color:inherit}.container{width:min(1180px,92%);margin:auto}
+nav{position:sticky;top:0;z-index:50;background:rgba(248,252,251,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(219,233,228,.8)}
+.navin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:800;letter-spacing:-.02em}.brand span{color:var(--teal)}
+.navlinks{display:flex;gap:18px;overflow:auto;font-size:.9rem;color:var(--muted)}
+.navlinks a{text-decoration:none;white-space:nowrap}
+.hero{padding:90px 0 65px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;z-index:-1}
+.hero:before{width:360px;height:360px;background:#d9eee7;right:-100px;top:20px}
+.hero:after{width:240px;height:240px;background:#e9e4ce;left:-90px;bottom:-60px}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--mint);color:#28786e;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+h1{font-size:clamp(2.7rem,6vw,5.7rem);line-height:.98;letter-spacing:-.065em;max-width:900px;margin:22px 0}
+.hero p{max-width:760px;font-size:1.12rem;color:var(--muted)}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:35px;align-items:end}
+.pillbox{background:rgba(255,255,255,.75);border:1px solid var(--line);padding:24px;border-radius:28px;box-shadow:var(--shadow)}
+.stat{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:12px 0}.stat:last-child{border:0}
+section{padding:70px 0}.section-head{max-width:780px;margin-bottom:30px}
+.eyebrow{color:var(--teal);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
+h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.045em;margin:10px 0}
+.lead{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 10px 30px rgba(35,83,72,.055);transition:.3s ease;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card h3{margin-top:0}.card p{color:var(--muted)}
+.number{width:38px;height:38px;border-radius:12px;background:var(--mint);display:grid;place-items:center;color:var(--teal);font-weight:900;margin-bottom:16px}
+.callout{background:linear-gradient(135deg,#e3f2ed,#f8f4e7);border:1px solid var(--line);border-radius:28px;padding:28px;margin:24px 0}
+.callout strong{color:#216d63}
+table{width:100%;border-collapse:collapse;background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+th,td{text-align:left;padding:15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#eaf5f1;color:#235e55}.tablewrap{overflow:auto;border-radius:18px;box-shadow:var(--shadow)}
+.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#f1f5f3;color:#41655d;font-size:.78rem;margin:3px}
+.accordion{border:1px solid var(--line);border-radius:18px;background:white;margin:10px 0;overflow:hidden}
+.question{width:100%;border:0;background:none;padding:20px;text-align:left;font:inherit;font-weight:750;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:20px}
+.answer{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 20px;color:var(--muted)}
+.accordion.open .answer{max-height:600px;padding:0 20px 20px}.plus{transition:.25s}.accordion.open .plus{transform:rotate(45deg)}
+.flash{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.flash .card{padding:20px}
+.quiz{background:#17312b;color:white;border-radius:30px;padding:32px;box-shadow:var(--shadow)}
+.quiz h3{color:white}.option{display:block;width:100%;text-align:left;padding:14px 16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:white;border-radius:14px;margin:9px 0;cursor:pointer}
+.option:hover{background:rgba(255,255,255,.12)}.option.correct{background:#2f8f83}.option.wrong{background:#8a5d58}
+.quiz-result{margin-top:16px;color:#d9eee7;font-weight:700}
+.search{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:14px;font:inherit;background:white}
+.hidden{display:none}
+footer{padding:55px 0;border-top:1px solid var(--line);color:var(--muted)}
+.disclaimer{font-size:.86rem;background:#fffaf0;border:1px solid #eadfc6;padding:18px;border-radius:18px}
+.reveal{opacity:0;transform:translateY(18px);transition:.7s ease}.reveal.visible{opacity:1;transform:none}
+.progress{position:fixed;left:0;top:0;height:3px;background:var(--teal);z-index:100;width:0}
+@media(max-width:850px){.hero-grid,.grid{grid-template-columns:1fr}.flash{grid-template-columns:1fr}.navlinks{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav><div class="container navin">
+<div class="brand">Parkinson<span>Mind</span> · Thursday Musing</div>
+<div class="navlinks">
+<a href="#diagnosis">Diagnosis</a><a href="#differentials">Differentials</a><a href="#treatment">Treatment</a><a href="#nonmotor">Non-motor</a><a href="#psych">Psychiatry</a><a href="#qa">Q&A</a>
+</div></div></nav>
+
+<header class="hero"><div class="container hero-grid">
+<div>
+<div class="kicker">Clinical learning · Psychiatry × Neurology</div>
+<h1>Parkinson’s disease, without the noise.</h1>
+<p>A structured, interactive distillation of the webinar: clinical diagnosis, atypical parkinsonism, imaging, levodopa strategy, motor fluctuations, dyskinesia, non-motor symptoms, and the psychiatric interface.</p>
+<div style="margin-top:22px"><span class="tag">Bradykinesia</span><span class="tag">MDS criteria</span><span class="tag">Levodopa</span><span class="tag">Psychosis</span><span class="tag">DBS</span></div>
+</div>
+<div class="pillbox reveal">
+<div class="stat"><span>Core clinical idea</span><strong>Bradykinesia</strong></div>
+<div class="stat"><span>Key tremor clue</span><strong>Re-emergent tremor</strong></div>
+<div class="stat"><span>Major psychiatric interface</span><strong>Psychosis / cognition</strong></div>
+<div class="stat"><span>Advanced intervention</span><strong>DBS</strong></div>
+</div></div></header>
+
+<main>
+<section id="diagnosis"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">01 · Recognise it clinically</div><h2>Diagnosis starts at the bedside.</h2><p class="lead">The speaker repeatedly emphasised that Parkinson’s disease is primarily a clinical diagnosis. The central motor requirement is bradykinesia.</p></div>
+<div class="grid">
+<div class="card reveal"><div class="number">01</div><h3>Bradykinesia</h3><p>Look for progressive decrement in amplitude and/or velocity during repetitive movements. Finger tapping is a practical bedside test; simple subjective “slowness” is not enough.</p></div>
+<div class="card reveal"><div class="number">02</div><h3>Rest tremor</h3><p>Classically slow, often asymmetric and described as “pill-rolling.” A tremor that disappears with posture and then returns after a few seconds is a <b>re-emergent tremor</b>.</p></div>
+<div class="card reveal"><div class="number">03</div><h3>Rigidity</h3><p>Lead-pipe rigidity is compatible with parkinsonism. “Clasp-knife” describes spasticity/pyramidal involvement rather than typical Parkinsonian rigidity.</p></div>
+</div>
+<div class="callout reveal"><strong>Clinical pearl:</strong> Parkinsonism requires bradykinesia plus rest tremor and/or rigidity. Gait imbalance was highlighted as a relatively late feature in idiopathic Parkinson’s disease and is not part of the modern core definition discussed.</div>
+<div class="tablewrap reveal"><table><thead><tr><th>What to examine</th><th>What matters</th><th>Practical interpretation</th></tr></thead><tbody>
+<tr><td>Finger tapping</td><td>Progressive decrement</td><td>Amplitude and/or speed progressively falls.</td></tr>
+<tr><td>Tremor</td><td>Rest + asymmetry</td><td>Re-emergence after posture is a strong clue.</td></tr>
+<tr><td>Gait</td><td>Stance width</td><td>Narrow stance is typical of idiopathic PD; a wide base suggests alternatives.</td></tr>
+<tr><td>Eye movements</td><td>Vertical gaze</td><td>Vertical gaze palsy should trigger consideration of PSP.</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section id="differentials"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">02 · Don't call every parkinsonism PD</div><h2>Use the pattern to identify mimics.</h2><p class="lead">The webinar framed the MDS criteria around core criteria, absolute exclusions, red flags and supporting features.</p></div>
+<div class="grid">
+<div class="card reveal"><h3>PSP</h3><p>Vertical gaze palsy, early falls—especially backward—frontal features, axial/truncal bradykinesia and an applause sign were highlighted.</p><span class="tag">Tauopathy</span></div>
+<div class="card reveal"><h3>CBD / corticobasal syndrome</h3><p>Asymmetry, apraxia and cortical sensory loss are important clues. The speaker described the combination of PSP and cortical basal features as possible because both are tauopathies.</p><span class="tag">Tauopathy</span></div>
+<div class="card reveal"><h3>MSA</h3><p>Autonomic dysfunction and ataxia are key clues; stridor and pyramidal features were also mentioned as red flags.</p><span class="tag">Synucleinopathy</span></div>
+<div class="card reveal"><h3>Dementia with Lewy bodies</h3><p>Early cognitive decline, fluctuations, well-formed visual hallucinations and REM sleep behaviour disorder. Dementia occurring before or within about one year of motor symptoms was discussed as a key distinction.</p><span class="tag">Synucleinopathy</span></div>
+<div class="card reveal"><h3>Vascular parkinsonism</h3><p>Often lower-body predominant, with preserved arm swing, wide-based short-stepped gait and vascular changes on MRI.</p><span class="tag">Secondary</span></div>
+<div class="card reveal"><h3>Normal-pressure hydrocephalus</h3><p>Lower-body, wide-based, magnetic gait with feet seeming stuck to the floor. The speaker stressed that it is important because it can be treatable.</p><span class="tag">Potentially treatable</span></div>
+<div class="card reveal"><h3>Drug-induced parkinsonism</h3><p>Often symmetric, but asymmetry and rest tremor can occur. Oro-lingual movements, dyskinesia before levodopa exposure and a clear dopamine-blocking drug history can help.</p><span class="tag">Medication-related</span></div>
+<div class="card reveal"><h3>FTD-parkinsonism</h3><p>Clear frontotemporal dementia features should prompt an alternative diagnosis rather than idiopathic PD.</p><span class="tag">Neurodegenerative</span></div>
+<div class="card reveal"><h3>Other exclusions</h3><p>Clear cerebellar abnormalities, cortical sensory loss with apraxia/aphasia, isolated lower-body involvement for prolonged periods, poor levodopa response, normal dopamine-transporter imaging and structural basal-ganglia lesions were discussed as reasons to reconsider idiopathic PD.</p><span class="tag">MDS framework</span></div>
+</div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head reveal"><div class="eyebrow">03 · Imaging</div><h2>Know what MRI can—and cannot—do.</h2></div>
+<div class="grid">
+<div class="card reveal"><h3>MRI</h3><p>The speaker's practical message: routine MRI generally does not diagnose idiopathic PD. It can, however, help identify alternatives such as PSP, MSA, vascular disease, NPH, tumour or other structural pathology.</p></div>
+<div class="card reveal"><h3>Characteristic patterns</h3><p>Hummingbird-type midbrain atrophy was described for PSP; the “hot cross bun” sign was discussed in MSA. Loss of the nigrosome-1 “swallow-tail” appearance on high-resolution 3T MRI may support PD but is not diagnostic.</p></div>
+<div class="card reveal"><h3>DaT / dopamine transporter imaging</h3><p>Useful when the clinical distinction is genuinely uncertain—e.g., degenerative parkinsonism versus essential tremor, functional symptoms or drug-induced parkinsonism. It demonstrates presynaptic dopaminergic deficit but does not reliably distinguish PD from PSP, MSA or DLB.</p></div>
+</div>
+</div></section>
+
+<section id="treatment"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">04 · Treatment</div><h2>Levodopa is not the enemy.</h2><p class="lead">A major theme was avoiding unnecessary fear of levodopa and prioritising function and quality of life.</p></div>
+<div class="grid">
+<div class="card reveal"><h3>When to start?</h3><p>No automatic rush. Discuss how symptoms affect function. If symptoms are not troublesome, observation is reasonable. There is no established drug that cures or reverses PD.</p></div>
+<div class="card reveal"><h3>Neuroprotection</h3><p>Rasagiline was presented as having the strongest—but still limited—evidence among discussed agents for a possible disease-modifying/neuroprotective effect. The webinar did not present this as a proven cure.</p></div>
+<div class="card reveal"><h3>Levodopa</h3><p>The speaker called levodopa the “master” treatment. The webinar argued that delaying needed levodopa does not protect patients from later dyskinesia or motor fluctuations and may unnecessarily sacrifice functional years.</p></div>
+<div class="card reveal"><h3>Young vs older patients</h3><p>Young-onset patients may be started with a dopamine agonist or anticholinergic in selected cases, but inadequate response should prompt earlier levodopa. Older patients were described as generally favouring levodopa.</p></div>
+<div class="card reveal"><h3>Anticholinergics</h3><p>Not automatically “safer.” Dry mouth, urinary symptoms, confusion, cognitive decline and glaucoma-related concerns were emphasised. They are particularly problematic in cognitively vulnerable patients.</p></div>
+<div class="card reveal"><h3>Dopamine agonists</h3><p>Can cause somnolence, hallucinations and impulse-control disorders such as gambling, hypersexuality, compulsive shopping and punding. These adverse effects make them less benign than levodopa.</p></div>
+</div>
+<div class="callout reveal"><strong>Practical levodopa message from the webinar:</strong> start low and titrate gradually to improve tolerability; dosing away from protein-containing meals may improve absorption. The speaker described common clinical schedules designed to keep doses separated from meals and noted that individualisation is essential.</div>
+<div class="tablewrap reveal"><table><thead><tr><th>Problem</th><th>Webinar strategy</th></tr></thead><tbody>
+<tr><td>Nausea / vomiting with levodopa</td><td>Gradual titration; domperidone was mentioned as a practical antiemetic because of limited CNS penetration.</td></tr>
+<tr><td>Wearing-off / motor fluctuations</td><td>First consider increasing levodopa frequency; adjuncts such as dopamine agonists, amantadine or safinamide may be considered in appropriate patients.</td></tr>
+<tr><td>Morning “off”</td><td>The speaker described an early-morning levodopa dose strategy in selected patients.</td></tr>
+<tr><td>Dyskinesia</td><td>If mild and not troublesome, treatment may not be required. Dose optimisation and amantadine were highlighted; clozapine was also discussed in selected cases.</td></tr>
+<tr><td>Night-time off</td><td>Controlled-release levodopa was described as having a limited practical role, particularly at night.</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section id="nonmotor"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">05 · The hidden burden</div><h2>Parkinson’s is not just a movement disorder.</h2></div>
+<div class="flash">
+<div class="card reveal"><h3>Olfaction</h3><p>Loss of smell was highlighted as an important non-motor association.</p></div>
+<div class="card reveal"><h3>REM sleep behaviour disorder</h3><p>Strongly associated with later α-synucleinopathy. Ask actively about dream enactment, shouting or limb movements during sleep.</p></div>
+<div class="card reveal"><h3>Constipation</h3><p>Very common and clinically relevant; GI dysfunction was discussed in the context of the gut–brain hypothesis.</p></div>
+<div class="card reveal"><h3>Mood</h3><p>Depression, anxiety, apathy and fatigue may accompany PD and can fluctuate with motor state.</p></div>
+<div class="card reveal"><h3>Pain</h3><p>Pain can be part of the non-motor burden and may worsen during “off” periods.</p></div>
+<div class="card reveal"><h3>Autonomic symptoms</h3><p>Urinary symptoms are common. The speaker emphasised overactive bladder symptoms—frequency, urgency and nocturia—rather than assuming urinary retention is Parkinson-related.</p></div>
+</div>
+<div class="callout reveal"><strong>Braak hypothesis:</strong> the webinar discussed a proposed route in which α-synuclein pathology may begin outside the brain, particularly involving the gut and/or olfactory system, before involving brainstem and basal-ganglia structures. The speaker explicitly described this as a hypothesis rather than settled fact.</div>
+</div></section>
+
+<section id="psych"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">06 · Psychiatry × Neurology</div><h2>This is where psychiatrists matter.</h2><p class="lead">The webinar repeatedly positioned non-motor and psychiatric symptoms as a major area of psychiatrist–neurologist collaboration.</p></div>
+<div class="grid">
+<div class="card reveal"><h3>Psychosis / hallucinations</h3><p>The speaker's hierarchy was that anticholinergics are particularly likely to provoke hallucinations, followed by dopamine agonists and amantadine; levodopa was described as less likely, although psychosis in advanced PD is multifactorial.</p></div>
+<div class="card reveal"><h3>Clozapine</h3><p>Presented as an important option for Parkinson-related psychosis and also potentially useful for dyskinesia. The webinar discussed low-dose use and the need to respect haematological monitoring and local protocols.</p></div>
+<div class="card reveal"><h3>Pimavanserin</h3><p>Discussed as a non-dopamine-antagonist option for psychosis in PD. The speaker considered it relatively safe but, in his experience, sometimes less effective than quetiapine or clozapine.</p></div>
+<div class="card reveal"><h3>Quetiapine</h3><p>Discussed as another commonly used option when antipsychotic treatment is needed without substantial dopamine D2 blockade.</p></div>
+<div class="card reveal"><h3>Non-motor “off”</h3><p>Anxiety, depression, fatigue, bladder symptoms and pain may worsen when levodopa effect wears off—even without dramatic motor deterioration.</p></div>
+<div class="card reveal"><h3>Dopamine dysregulation</h3><p>The webinar described psychological over-reliance on dopaminergic medication despite the absence of clear motor “off,” making management difficult and requiring careful dose strategy.</p></div>
+</div>
+<div class="callout reveal"><strong>Medication principle:</strong> avoid abrupt withdrawal of levodopa. The speaker described an acute dopamine-deficient withdrawal syndrome with severe rigidity and potentially life-threatening systemic consequences. Dopaminergic and other PD medications should be tapered thoughtfully rather than stopped casually.</div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head reveal"><div class="eyebrow">07 · Advanced disease</div><h2>Recognise the transition points.</h2></div>
+<div class="grid">
+<div class="card reveal"><h3>Wearing-off</h3><p>When each levodopa dose lasts progressively less time, increasing dose frequency was presented as the first practical manoeuvre.</p></div>
+<div class="card reveal"><h3>Dyskinesia</h3><p>Choreiform/dancing movements often affect limbs and trunk. Mild dyskinesia may be accepted if the patient is comfortable and functionally better.</p></div>
+<div class="card reveal"><h3>Amantadine</h3><p>Presented as a useful anti-dyskinesia agent. The webinar preferred immediate-release preparations in practice and cautioned about sleep disruption, hallucinations and other adverse effects.</p></div>
+<div class="card reveal"><h3>Safinamide</h3><p>Discussed as an adjunct for motor fluctuations rather than early PD therapy. The speaker described 50 mg as a practical dose and emphasised avoiding unsafe duplication of MAO-B inhibitors.</p></div>
+<div class="card reveal"><h3>Apomorphine</h3><p>Subcutaneous apomorphine can act rapidly as a rescue treatment for sudden “off.” Continuous infusion can provide sustained dopaminergic stimulation but was described as cumbersome and limited by adverse effects and cost.</p></div>
+<div class="card reveal"><h3>DBS</h3><p>For carefully selected advanced PD, especially with disabling fluctuations/dyskinesia despite medical therapy. The webinar stressed appropriate disease duration and the absence of significant dementia or major psychiatric contraindications.</p></div>
+</div>
+<div class="callout reveal"><strong>“5-to-1” selection concept discussed:</strong> more than five daily levodopa doses, more than two hours of daily “off,” and more than one hour of troublesome dyskinesia were presented as practical features that may prompt consideration of DBS in an otherwise suitable patient.</div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head reveal"><div class="eyebrow">08 · When Parkinson suddenly worsens</div><h2>Do not assume the disease simply “progressed.”</h2></div>
+<div class="grid">
+<div class="card reveal"><h3>Medication review</h3><p>Look for newly introduced dopamine-blocking drugs or unnecessary polypharmacy.</p></div>
+<div class="card reveal"><h3>Infection</h3><p>UTI, sepsis and other systemic illnesses can markedly worsen cognition and motor function.</p></div>
+<div class="card reveal"><h3>Structural causes</h3><p>Consider subdural haematoma and other acute intracranial pathology when clinically appropriate.</p></div>
+<div class="card reveal"><h3>Autoimmune disease</h3><p>When confusion, seizures or atypical features accompany deterioration, the speaker suggested considering autoimmune pathology such as NMDA-receptor or VGKC-associated disease where appropriate.</p></div>
+<div class="card reveal"><h3>Polypharmacy</h3><p>As disease advances, simplifying medication was repeatedly advocated: “less is beautiful.”</p></div>
+<div class="card reveal"><h3>Do not stop abruptly</h3><p>Sudden withdrawal of dopaminergic drugs—especially levodopa—can itself precipitate severe deterioration.</p></div>
+</div></div></section>
+
+<section id="qa"><div class="container">
+<div class="section-head reveal"><div class="eyebrow">09 · Webinar Q&A</div><h2>Questions worth remembering.</h2>
+<p class="lead">Tap a question to reveal the answer as discussed during the session.</p></div>
+<div id="accordion"></div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head reveal"><div class="eyebrow">10 · Test yourself</div><h2>Five-minute clinical recall.</h2></div>
+<div class="quiz reveal" id="quiz">
+<h3 id="qtext"></h3><div id="options"></div><div class="quiz-result" id="result"></div>
+</div>
+</div></section>
+
+<section><div class="container">
+<div class="disclaimer"><b>Source note:</b> This learning page is derived from the supplied transcript of the Thursday Musing webinar on Parkinson’s disease. It is an educational restructuring of the speaker’s remarks, not an independent clinical guideline. Some transcript terminology was imperfect because it originated from automatic speech transcription. For patient care, verify doses, indications, contraindications, monitoring requirements and current evidence against authoritative prescribing information and contemporary movement-disorder guidelines.</div>
+</div></section>
+</main>
+
+<footer><div class="container">
+<b>ParkinsonMind · Thursday Musing Clinical Pearls</b>
+<p>Designed as a rapid-reference learning interface for psychiatrists and trainees. Source: supplied webinar transcript.</p>
+</div></footer>
+
+<script>
+const qa=[
+["How is bradykinesia different from simple slowness?","The key is progressive decrement in amplitude and/or velocity during repetitive movement. Simple slowness can occur with mood changes, stroke and other disorders; it is not sufficient by itself."],
+["What is a re-emergent tremor?","A rest tremor disappears when the arms are held out and then returns after a short latency, typically in the same limb and frequency. The speaker considered this a strong clue for idiopathic Parkinson’s disease."],
+["What does a wide-based gait suggest?","The webinar contrasted idiopathic PD, where stance width is typically narrow, with wider-based gait suggesting alternatives such as ataxia, MSA, PSP, NPH or vascular parkinsonism."],
+["Does MRI diagnose Parkinson’s disease?","Not routinely. MRI is mainly useful for identifying alternative diagnoses or supportive patterns such as PSP midbrain atrophy, MSA-related changes, vascular disease or NPH."],
+["When is dopamine-transporter imaging useful?","When the clinical diagnosis is genuinely uncertain—for example, degenerative parkinsonism versus essential tremor, functional symptoms or drug-induced parkinsonism. It does not reliably distinguish PD from other presynaptic degenerative parkinsonian disorders."],
+["Should levodopa be deliberately delayed?","The speaker argued strongly against withholding needed levodopa merely to “save” it for later. The webinar discussed evidence suggesting that delayed initiation does not prevent later dyskinesia and can sacrifice functional years."],
+["Which drugs were highlighted as more likely to cause hallucinations?","Anticholinergics were placed highest, followed by dopamine agonists and amantadine. Levodopa was described as comparatively less likely, although psychosis in advanced PD is multifactorial."],
+["What are important impulse-control problems with dopamine agonists?","Compulsive gambling, hypersexuality, compulsive shopping and punding were specifically discussed, along with excessive sleepiness/sudden sleep attacks."],
+["What are the psychiatric options discussed for psychosis in PD?","Clozapine, quetiapine and pimavanserin were discussed. Clozapine has evidence for Parkinson-related psychosis and was also described as useful for dyskinesia in selected cases."],
+["What is the practical message about abrupt levodopa withdrawal?","Avoid it. The speaker described an acute dopamine-deficient withdrawal syndrome with severe rigidity and potentially life-threatening complications."],
+["What non-motor symptoms are particularly linked to Parkinsonian synucleinopathy?","Loss of smell and REM sleep behaviour disorder were emphasised, with RBD described as particularly strongly associated with future alpha-synucleinopathy."],
+["When should DBS be considered?","In selected advanced PD with disabling motor fluctuations/dyskinesia despite medical therapy, after adequate diagnostic confidence and with careful assessment of cognition and psychiatric status."]
+];
+const acc=document.getElementById("accordion");
+qa.forEach((x,i)=>{acc.innerHTML+=`<div class="accordion"><button class="question">${i+1}. ${x[0]} <span class="plus">＋</span></button><div class="answer">${x[1]}</div></div>`});
+document.querySelectorAll(".question").forEach(b=>b.onclick=()=>b.parentElement.classList.toggle("open"));
+
+const questions=[
+["A patient has progressive decrement in finger-tapping amplitude. What does this demonstrate?","Bradykinesia",["Tremor","Bradykinesia","Spasticity","Ataxia"]],
+["Which finding strongly suggests PSP?","Vertical gaze palsy",["Re-emergent tremor","Vertical gaze palsy","Hyposmia alone","Urinary urgency"]],
+["Which medication class was highlighted as particularly prone to causing hallucinations?","Anticholinergics",["Anticholinergics","Levodopa","Carbidopa","Benserazide"]],
+["A patient with PD develops disabling dyskinesia. Which drug was highlighted as useful?","Amantadine",["Propranolol","Amantadine","Domperidone","Benserazide"]],
+["Which symptom is strongly associated with future alpha-synucleinopathy?","REM sleep behaviour disorder",["Clasp-knife rigidity","REM sleep behaviour disorder","Isolated urinary retention","Action tremor"]]
+];
+let qi=0,score=0,answered=false;
+function renderQ(){
+ const q=questions[qi]; document.getElementById("qtext").textContent=`${qi+1}/${questions.length} · ${q[0]}`;
+ document.getElementById("options").innerHTML=q[2].map(o=>`<button class="option">${o}</button>`).join("");
+ document.getElementById("result").textContent="";
+ answered=false;
+ document.querySelectorAll(".option").forEach(btn=>btn.onclick=()=>{
+   if(answered)return; answered=true;
+   const correct=btn.textContent===q[1];
+   if(correct){btn.classList.add("correct");score++}else{
+     btn.classList.add("wrong");
+     [...document.querySelectorAll(".option")].find(x=>x.textContent===q[1]).classList.add("correct");
+   }
+   document.getElementById("result").textContent=correct?"Correct.":`Not quite. Correct answer: ${q[1]}`;
+   setTimeout(()=>{qi++; if(qi<questions.length)renderQ(); else document.getElementById("result").textContent=`Completed: ${score}/${questions.length}. Reload the page to retry.`},850);
+ });
+}
+renderQ();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
+window.addEventListener("scroll",()=>{const h=document.documentElement.scrollHeight-innerHeight;document.getElementById("progress").style.width=(scrollY/h*100)+"%"});
+</script>
+</body>
+</html>
