@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Portal | Thomson Clinic</title>
+
+<style>
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 70px;
+    background: #ffffff;
+    border-bottom: 1px solid #e7eaf0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 700;
+    color: #173b67;
+}
+
+.logo span {
+    color: #2c7be5;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #555;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: #1769e0;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1258bf;
+}
+
+.btn-secondary {
+    background: #eef3fa;
+    color: #173b67;
+}
+
+.btn-secondary:hover {
+    background: #e1e9f5;
+}
+
+.btn-danger {
+    background: #fff0f0;
+    color: #c62828;
+}
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.login-page {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    border-radius: 18px;
+    padding: 42px;
+    box-shadow: 0 12px 40px rgba(25, 50, 80, 0.08);
+    text-align: center;
+}
+
+.login-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #eaf2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    font-size: 30px;
+}
+
+.login-card h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.login-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.google-btn {
+    width: 100%;
+    height: 48px;
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #3c4043;
+    transition: 0.2s;
+}
+
+.google-btn:hover {
+    background: #f8faff;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+}
+
+.login-note {
+    font-size: 12px !important;
+    margin-top: 22px;
+    margin-bottom: 0 !important;
+    color: #8a8f98 !important;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+    display: none;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 25px 60px;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome {
+    background: linear-gradient(135deg, #173b67, #2168ae);
+    color: white;
+    border-radius: 18px;
+    padding: 35px;
+    margin-bottom: 30px;
+}
+
+.welcome small {
+    opacity: 0.8;
+    font-size: 13px;
+}
+
+.welcome h1 {
+    font-size: 30px;
+    margin: 7px 0;
+}
+
+.welcome p {
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 13px;
+    border: 1px solid #e8ebf1;
+}
+
+.stat-card small {
+    color: #7a8493;
+    font-size: 12px;
+}
+
+.stat-card h2 {
+    margin-top: 8px;
+    font-size: 25px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.section-title h2 {
+    font-size: 20px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.content-card {
+    background: white;
+    border: 1px solid #e6e9ef;
+    border-radius: 14px;
+    padding: 22px;
+    transition: 0.2s;
+}
+
+.content-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30,50,80,0.08);
+}
+
+.content-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: #eef5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.content-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.content-card p {
+    color: #707887;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.content-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: #f0f2f5;
+    padding: 5px 9px;
+    border-radius: 5px;
+    color: #606977;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-section {
+    background: white;
+    margin-top: 35px;
+    border-radius: 14px;
+    border: 1px solid #e6e9ef;
+    padding: 25px;
+}
+
+.profile-section h2 {
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f1f4;
+    font-size: 14px;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-label {
+    color: #78818e;
+}
+
+.status {
+    color: #16834a;
+    font-weight: 600;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .welcome {
+        padding: 27px;
+    }
+
+    .welcome h1 {
+        font-size: 25px;
+    }
+
+    .login-card {
+        padding: 30px 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="logo">
+        Thomson <span>Clinic</span>
+    </div>
+
+    <div class="header-right">
+
+        <span id="headerUserName" class="user-name"></span>
+
+        <button
+            id="logoutBtn"
+            class="btn btn-danger"
+            style="display:none;"
+            onclick="logout()">
+            Sign out
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     LOGIN PAGE
+========================= -->
+
+<section id="loginPage" class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+        <h1>Member Portal</h1>
+
+        <p>
+            Sign in with your Google account to access
+            protected educational resources and member content.
+        </p>
+
+        <!--
+        ==========================================
+        GOOGLE LOGIN BUTTON
+        ==========================================
+        
+        CURRENTLY THIS IS A DEMO.
+
+        Later we will replace this with:
+        Google Identity Services
+
+        ==========================================
+        -->
+
+        <button
+            class="google-btn"
+            onclick="demoGoogleLogin()">
+
+            <svg class="google-logo"
+                 viewBox="0 0 24 24">
+
+                <path fill="#4285F4"
+                      d="M21.35 12.23c0-.79-.07-1.55-.2-2.23H12v4.22h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.38z"/>
+
+                <path fill="#34A853"
+                      d="M12 21.82c2.63 0 4.84-.87 6.45-2.37l-3.14-2.45c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.52A9.75 9.75 0 0 0 12 21.82z"/>
+
+                <path fill="#FBBC05"
+                      d="M6.54 13.9a5.86 5.86 0 0 1 0-3.76V7.62H3.3a9.82 9.82 0 0 0 0 8.8l3.24-2.52z"/>
+
+                <path fill="#EA4335"
+                      d="M12 6.11c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.18 14.63 2.18 12 2.18a9.75 9.75 0 0 0-8.7 5.44l3.24 2.52C7.31 7.83 9.46 6.11 12 6.11z"/>
+
+            </svg>
+
+            Continue with Google
+
+        </button>
+
+        <p class="login-note">
+            Access is restricted to registered members.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section id="dashboard" class="dashboard">
+
+    <div class="dashboard-container">
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <small>MEMBER PORTAL</small>
+
+            <h1>
+                Welcome, <span id="welcomeName">Member</span>
+            </h1>
+
+            <p>
+                Your educational resources and member content are available below.
+            </p>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <small>ACCOUNT STATUS</small>
+
+                <h2 class="status">
+                    Active
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <small>AVAILABLE RESOURCES</small>
+
+                <h2 id="resourceCount">
+                    6
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <small>MEMBER TYPE</small>
+
+                <h2>
+                    Doctor
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="section-title">
+
+            <h2>
+                Educational Resources
+            </h2>
+
+            <button class="btn btn-secondary"
+                    onclick="loadContent()">
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div id="contentGrid" class="content-grid">
+
+            <!-- Content generated by JavaScript -->
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile-section">
+
+            <h2>
+                My Account
+            </h2>
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Name
+                </span>
+
+                <span id="profileName">
+                    —
+                </span>
+
+            </div>
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Email
+                </span>
+
+                <span id="profileEmail">
+                    —
+                </span>
+
+            </div>
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Role
+                </span>
+
+                <span>
+                    MEMBER
+                </span>
+
+            </div>
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Account status
+                </span>
+
+                <span class="status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ============================================================
+   CONFIGURATION
+============================================================ */
+
+/*
+   LATER PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE.
+
+   Example:
+
+   const API_URL =
+   "https://script.google.com/macros/s/XXXXXXXX/exec";
+*/
+
+const API_URL = "";
+
+
+/* ============================================================
+   DEMO USER
+============================================================ */
+
+const demoUser = {
+
+    name: "Dr Bishnu Prasad Sahoo",
+
+    email: "doctor@example.com",
+
+    role: "MEMBER",
+
+    status: "ACTIVE"
+
+};
+
+
+/* ============================================================
+   DEMO CONTENT
+============================================================ */
+
+const demoContent = [
+
+    {
+        id: "001",
+        title: "Psychiatry Notes",
+        description:
+            "Structured notes and high-yield psychiatric concepts.",
+        type: "PDF"
+    },
+
+    {
+        id: "002",
+        title: "Psychopharmacology",
+        description:
+            "Practical resources on psychotropic medications.",
+        type: "COURSE"
+    },
+
+    {
+        id: "003",
+        title: "Addiction Psychiatry",
+        description:
+            "Educational material covering substance use disorders.",
+        type: "MODULE"
+    },
+
+    {
+        id: "004",
+        title: "Clinical Scales",
+        description:
+            "Reference material for commonly used psychiatric scales.",
+        type: "RESOURCE"
+    },
+
+    {
+        id: "005",
+        title: "Case Discussions",
+        description:
+            "Selected clinical cases and discussion material.",
+        type: "VIDEO"
+    },
+
+    {
+        id: "006",
+        title: "Clinical Updates",
+        description:
+            "Selected updates and educational material.",
+        type: "ARTICLE"
+    }
+
+];
+
+
+/* ============================================================
+   DEMO GOOGLE LOGIN
+============================================================ */
+
+function demoGoogleLogin() {
+
+    /*
+       THIS IS ONLY FOR TESTING THE WEBSITE.
+
+       In the real implementation this function will:
+
+       1. Open Google authentication.
+       2. Receive Google's credential/token.
+       3. Send it to Apps Script.
+       4. Apps Script verifies the user.
+       5. Apps Script checks the Users Sheet.
+       6. If ACTIVE → dashboard.
+       7. If not authorized → access denied.
+    */
+
+    loginUser(demoUser);
+
+}
+
+
+/* ============================================================
+   LOGIN USER
+============================================================ */
+
+function loginUser(user) {
+
+    if (!user) {
+
+        alert("Unable to authenticate user.");
+
+        return;
+
+    }
+
+    if (user.status !== "ACTIVE") {
+
+        alert(
+            "Your account is not currently authorized to access this portal."
+        );
+
+        return;
+
+    }
+
+    /*
+       Save basic session information.
+
+       IMPORTANT:
+
+       For the real implementation,
+       don't treat localStorage as proof of authentication.
+
+       Authentication must be verified by Apps Script.
+    */
+
+    localStorage.setItem(
+        "demoUser",
+        JSON.stringify(user)
+    );
+
+    showDashboard(user);
+
+}
+
+
+/* ============================================================
+   SHOW DASHBOARD
+============================================================ */
+
+function showDashboard(user) {
+
+    document
+        .getElementById("loginPage")
+        .style.display = "none";
+
+    document
+        .getElementById("dashboard")
+        .style.display = "block";
+
+    document
+        .getElementById("logoutBtn")
+        .style.display = "block";
+
+    document
+        .getElementById("headerUserName")
+        .textContent = user.name;
+
+    document
+        .getElementById("welcomeName")
+        .textContent = user.name;
+
+    document
+        .getElementById("profileName")
+        .textContent = user.name;
+
+    document
+        .getElementById("profileEmail")
+        .textContent = user.email;
+
+    loadContent();
+
+}
+
+
+/* ============================================================
+   LOAD CONTENT
+============================================================ */
+
+function loadContent() {
+
+    /*
+       DEMO:
+
+       Currently loading content from local JavaScript.
+
+       REAL VERSION:
+
+       Replace this with:
+
+       fetch(API_URL, {
+           method: "POST",
+           body: JSON.stringify({
+               action: "getContent",
+               token: googleToken
+           })
+       })
+
+       Apps Script will return only content
+       that this user is authorized to access.
+    */
+
+    renderContent(demoContent);
+
+}
+
+
+/* ============================================================
+   RENDER CONTENT
+============================================================ */
+
+function renderContent(content) {
+
+    const grid =
+        document.getElementById("contentGrid");
+
+    grid.innerHTML = "";
+
+    document
+        .getElementById("resourceCount")
+        .textContent = content.length;
+
+
+    content.forEach(item => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "content-card";
+
+        card.innerHTML = `
+
+            <div class="content-icon">
+                ${getIcon(item.type)}
+            </div>
+
+            <span class="content-tag">
+                ${item.type}
+            </span>
+
+            <h3>
+                ${item.title}
+            </h3>
+
+            <p>
+                ${item.description}
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="openContent('${item.id}')">
+
+                Open Resource
+
+            </button>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ============================================================
+   CONTENT ICON
+============================================================ */
+
+function getIcon(type) {
+
+    const icons = {
+
+        PDF: "📄",
+
+        COURSE: "🎓",
+
+        MODULE: "📚",
+
+        RESOURCE: "📋",
+
+        VIDEO: "▶",
+
+        ARTICLE: "📝"
+
+    };
+
+    return icons[type] || "📁";
+
+}
+
+
+/* ============================================================
+   OPEN CONTENT
+============================================================ */
+
+function openContent(id) {
+
+    /*
+       REAL VERSION:
+
+       Don't simply expose a public Drive URL.
+
+       Instead:
+
+       Browser
+          ↓
+       Apps Script
+          ↓
+       Verify authenticated user
+          ↓
+       Check permission
+          ↓
+       Return authorized resource
+    */
+
+    const item =
+        demoContent.find(x => x.id === id);
+
+    if (!item) {
+
+        alert("Resource not found.");
+
+        return;
+
+    }
+
+    alert(
+        "Opening: " + item.title +
+        "\n\nThis will later open the protected resource."
+    );
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout() {
+
+    localStorage.removeItem("demoUser");
+
+    document
+        .getElementById("dashboard")
+        .style.display = "none";
+
+    document
+        .getElementById("loginPage")
+        .style.display = "flex";
+
+    document
+        .getElementById("logoutBtn")
+        .style.display = "none";
+
+    document
+        .getElementById("headerUserName")
+        .textContent = "";
+
+}
+
+
+/* ============================================================
+   CHECK EXISTING SESSION
+============================================================ */
+
+function checkSession() {
+
+    const savedUser =
+        localStorage.getItem("demoUser");
+
+    if (!savedUser) {
+
+        return;
+
+    }
+
+    try {
+
+        const user =
+            JSON.parse(savedUser);
+
+        /*
+           DEMO ONLY.
+
+           REAL VERSION:
+
+           Call Apps Script to verify
+           that the Google session/token
+           is still valid and the user
+           is still ACTIVE.
+        */
+
+        if (user.status === "ACTIVE") {
+
+            showDashboard(user);
+
+        }
+
+    } catch (error) {
+
+        localStorage.removeItem("demoUser");
+
+    }
+
+}
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        checkSession();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1666 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doctor Dashboard | Thomson Clinic</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background: #f5f7fb;
+    color: #172033;
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    width: 245px;
+    background: #ffffff;
+    border-right: 1px solid #e6e9ef;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+}
+
+.logo {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 25px;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+.logo strong {
+    font-size: 20px;
+    color: #173b67;
+}
+
+.logo span {
+    color: #2879df;
+}
+
+
+/* Navigation */
+
+.navigation {
+    padding: 20px 13px;
+}
+
+.nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: #9aa2ad;
+
+    padding: 0 12px 10px;
+}
+
+.nav-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #5f6977;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #f3f6fa;
+    color: #173b67;
+}
+
+.nav-item.active {
+    background: #eaf2ff;
+    color: #1769e0;
+    font-weight: 600;
+}
+
+.nav-icon {
+    width: 20px;
+    text-align: center;
+}
+
+
+/* Sidebar bottom */
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 15px;
+    border-top: 1px solid #eef0f4;
+}
+
+.help-box {
+    background: #f5f8fc;
+    border-radius: 10px;
+    padding: 15px;
+
+    font-size: 12px;
+    color: #687383;
+
+    line-height: 1.5;
+}
+
+.help-box strong {
+    display: block;
+    color: #26374d;
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar {
+    height: 72px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e6e9ef;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 50;
+}
+
+.page-title {
+    font-size: 18px;
+    font-weight: 650;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.notification {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #f5f7fa;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.notification-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #e53935;
+
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #dbe9fb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    color: #1769e0;
+
+    font-size: 13px;
+}
+
+.profile-info {
+    line-height: 1.2;
+}
+
+.profile-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.profile-role {
+    font-size: 11px;
+    color: #89929e;
+
+    margin-top: 3px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+    max-width: 1400px;
+    margin: auto;
+
+    padding: 32px 35px 60px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 28px;
+}
+
+.welcome h1 {
+    font-size: 27px;
+    margin-bottom: 6px;
+}
+
+.welcome p {
+    font-size: 14px;
+    color: #7a8491;
+}
+
+.date {
+    font-size: 12px;
+    color: #8a939f;
+}
+
+
+/* =====================================================
+   QUICK STATS
+===================================================== */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+
+    border: 1px solid #e7eaf0;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-text small {
+    font-size: 11px;
+    color: #8b94a1;
+
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.stat-text h2 {
+    margin-top: 7px;
+    font-size: 25px;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 10px;
+
+    background: #eef4fc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(280px, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   SECTION CARD
+===================================================== */
+
+.section-card {
+    background: #ffffff;
+
+    border: 1px solid #e6e9ef;
+
+    border-radius: 13px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 17px;
+}
+
+.view-all {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #1769e0;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   COURSE CARDS
+===================================================== */
+
+.course {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.course:last-child {
+    border-bottom: none;
+}
+
+.course-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 9px;
+
+    background: #eef4fc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    flex-shrink: 0;
+}
+
+.course-info {
+    flex: 1;
+}
+
+.course-info h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.course-info p {
+    font-size: 12px;
+    color: #858e9a;
+}
+
+.progress {
+    width: 100%;
+    height: 5px;
+
+    background: #edf0f4;
+
+    border-radius: 5px;
+
+    margin-top: 9px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+
+    background: #2879df;
+
+    border-radius: 5px;
+}
+
+.progress-text {
+    font-size: 10px;
+    color: #8b94a1;
+
+    margin-top: 5px;
+}
+
+.continue-btn {
+    border: none;
+
+    background: #edf4ff;
+
+    color: #1769e0;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    padding: 8px 11px;
+
+    border-radius: 6px;
+}
+
+
+/* =====================================================
+   ANNOUNCEMENTS
+===================================================== */
+
+.announcement {
+    padding: 12px 0;
+
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.announcement:last-child {
+    border-bottom: none;
+}
+
+.announcement-date {
+    font-size: 10px;
+    color: #8c95a0;
+
+    margin-bottom: 4px;
+}
+
+.announcement h3 {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.announcement p {
+    font-size: 11px;
+    color: #7e8793;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   UPCOMING
+===================================================== */
+
+.event {
+    display: flex;
+    gap: 12px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.event:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    width: 42px;
+    height: 42px;
+
+    background: #eef4fc;
+
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.event-date strong {
+    font-size: 15px;
+    color: #1769e0;
+}
+
+.event-date small {
+    font-size: 8px;
+    color: #7f8996;
+}
+
+.event h3 {
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.event p {
+    font-size: 10px;
+    color: #8a939f;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.member-card {
+    background: #173b67;
+
+    color: white;
+
+    border-radius: 13px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+}
+
+.member-card small {
+    opacity: .7;
+    font-size: 10px;
+    letter-spacing: .8px;
+}
+
+.member-card h2 {
+    font-size: 17px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+.member-details {
+    font-size: 11px;
+    line-height: 1.8;
+
+    opacity: .85;
+}
+
+.member-status {
+    margin-top: 15px;
+
+    display: inline-block;
+
+    background: rgba(255,255,255,.12);
+
+    border-radius: 5px;
+
+    padding: 5px 9px;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   MOBILE HEADER
+===================================================== */
+
+.mobile-menu {
+    display: none;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    background: #f3f5f8;
+
+    border-radius: 7px;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .25s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .topbar {
+        padding: 0 18px;
+    }
+
+    .content {
+        padding: 25px 18px 50px;
+    }
+
+    .welcome {
+        display: block;
+    }
+
+    .date {
+        margin-top: 10px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .profile-info {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 23px;
+    }
+
+    .course {
+        align-items: flex-start;
+    }
+
+    .continue-btn {
+        display: none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <strong>Thomson <span>Clinic</span></strong>
+    </div>
+
+
+    <nav class="navigation">
+
+        <div class="nav-label">
+            MAIN MENU
+        </div>
+
+
+        <div class="nav-item active"
+             onclick="showSection('dashboard')">
+
+            <span class="nav-icon">⌂</span>
+
+            Dashboard
+
+        </div>
+
+
+        <div class="nav-item"
+             onclick="showSection('courses')">
+
+            <span class="nav-icon">▣</span>
+
+            My Courses
+
+        </div>
+
+
+        <div class="nav-item"
+             onclick="showSection('resources')">
+
+            <span class="nav-icon">▤</span>
+
+            Resources
+
+        </div>
+
+
+        <div class="nav-item"
+             onclick="showSection('events')">
+
+            <span class="nav-icon">◷</span>
+
+            Events
+
+        </div>
+
+
+        <div class="nav-item"
+             onclick="showSection('profile')">
+
+            <span class="nav-icon">◯</span>
+
+            My Profile
+
+        </div>
+
+
+        <div style="height:20px"></div>
+
+        <div class="nav-label">
+            ACCOUNT
+        </div>
+
+
+        <div class="nav-item"
+             onclick="logout()">
+
+            <span class="nav-icon">↪</span>
+
+            Sign Out
+
+        </div>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="help-box">
+
+            <strong>
+                Need assistance?
+            </strong>
+
+            Contact the Thomson Clinic
+            support team for help with
+            your account or resources.
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <div style="display:flex;align-items:center;gap:12px;">
+
+        <button
+            class="mobile-menu"
+            onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+        <div class="page-title">
+            Doctor Dashboard
+        </div>
+
+    </div>
+
+
+    <div class="topbar-right">
+
+
+        <div class="notification"
+             onclick="showNotification()">
+
+            ♧
+
+            <div class="notification-dot"></div>
+
+        </div>
+
+
+        <div class="profile">
+
+            <div class="avatar">
+                BS
+            </div>
+
+            <div class="profile-info">
+
+                <div class="profile-name">
+                    Dr Bishnu Prasad Sahoo
+                </div>
+
+                <div class="profile-role">
+                    Member
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<div class="welcome">
+
+    <div>
+
+        <h1>
+            Good morning, Dr Bishnu.
+        </h1>
+
+        <p>
+            Continue your learning and explore
+            the latest clinical resources.
+        </p>
+
+    </div>
+
+    <div class="date">
+        Wednesday, 16 September 2026
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-text">
+
+            <small>
+                Courses
+            </small>
+
+            <h2>
+                08
+            </h2>
+
+        </div>
+
+        <div class="stat-icon">
+            ▣
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-text">
+
+            <small>
+                Completed
+            </small>
+
+            <h2>
+                03
+            </h2>
+
+        </div>
+
+        <div class="stat-icon">
+            ✓
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-text">
+
+            <small>
+                Resources
+            </small>
+
+            <h2>
+                42
+            </h2>
+
+        </div>
+
+        <div class="stat-icon">
+            ▤
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-text">
+
+            <small>
+                CME Credits
+            </small>
+
+            <h2>
+                12
+            </h2>
+
+        </div>
+
+        <div class="stat-icon">
+            ★
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN GRID
+===================================================== -->
+
+<div class="dashboard-grid">
+
+
+<!-- LEFT COLUMN -->
+
+<div>
+
+
+<!-- CONTINUE LEARNING -->
+
+<div class="section-card">
+
+    <div class="section-header">
+
+        <h2>
+            Continue Learning
+        </h2>
+
+        <span
+            class="view-all"
+            onclick="showSection('courses')">
+
+            View all
+
+        </span>
+
+    </div>
+
+
+
+    <div class="course">
+
+        <div class="course-icon">
+            💊
+        </div>
+
+        <div class="course-info">
+
+            <h3>
+                Practical Psychopharmacology
+            </h3>
+
+            <p>
+                Advanced prescribing and clinical practice
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:72%;">
+                </div>
+
+            </div>
+
+            <div class="progress-text">
+                72% completed
+            </div>
+
+        </div>
+
+        <button
+            class="continue-btn"
+            onclick="openCourse('Practical Psychopharmacology')">
+
+            Continue
+
+        </button>
+
+    </div>
+
+
+
+    <div class="course">
+
+        <div class="course-icon">
+            🧠
+        </div>
+
+        <div class="course-info">
+
+            <h3>
+                Addiction Psychiatry
+            </h3>
+
+            <p>
+                Clinical assessment and treatment
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:43%;">
+                </div>
+
+            </div>
+
+            <div class="progress-text">
+                43% completed
+            </div>
+
+        </div>
+
+        <button
+            class="continue-btn"
+            onclick="openCourse('Addiction Psychiatry')">
+
+            Continue
+
+        </button>
+
+    </div>
+
+
+
+    <div class="course">
+
+        <div class="course-icon">
+            📋
+        </div>
+
+        <div class="course-info">
+
+            <h3>
+                Psychiatric Assessment
+            </h3>
+
+            <p>
+                Structured clinical assessment
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:18%;">
+                </div>
+
+            </div>
+
+            <div class="progress-text">
+                18% completed
+            </div>
+
+        </div>
+
+        <button
+            class="continue-btn"
+            onclick="openCourse('Psychiatric Assessment')">
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- RECENT RESOURCES -->
+
+<div class="section-card">
+
+    <div class="section-header">
+
+        <h2>
+            Recently Added
+        </h2>
+
+        <span
+            class="view-all"
+            onclick="showSection('resources')">
+
+            View all
+
+        </span>
+
+    </div>
+
+
+    <div class="course">
+
+        <div class="course-icon">
+            📄
+        </div>
+
+        <div class="course-info">
+
+            <h3>
+                Antidepressant Prescribing Guide
+            </h3>
+
+            <p>
+                PDF · Updated September 2026
+            </p>
+
+        </div>
+
+        <button
+            class="continue-btn"
+            onclick="openResource('Antidepressant Prescribing Guide')">
+
+            Open
+
+        </button>
+
+    </div>
+
+
+    <div class="course">
+
+        <div class="course-icon">
+            🎥
+        </div>
+
+        <div class="course-info">
+
+            <h3>
+                Managing Treatment-Resistant Depression
+            </h3>
+
+            <p>
+                Video · 38 minutes
+            </p>
+
+        </div>
+
+        <button
+            class="continue-btn"
+            onclick="openResource('Managing Treatment-Resistant Depression')">
+
+            Watch
+
+        </button>
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- RIGHT COLUMN -->
+
+<div>
+
+
+<!-- MEMBER CARD -->
+
+<div class="member-card">
+
+    <small>
+        MEMBERSHIP
+    </small>
+
+    <h2>
+        Professional Member
+    </h2>
+
+    <div class="member-details">
+
+        Dr Bishnu Prasad Sahoo<br>
+
+        MD Psychiatry<br>
+
+        Member since September 2026
+
+    </div>
+
+    <span class="member-status">
+        ● ACTIVE MEMBER
+    </span>
+
+</div>
+
+
+
+<!-- ANNOUNCEMENTS -->
+
+<div class="section-card">
+
+    <div class="section-header">
+
+        <h2>
+            Announcements
+        </h2>
+
+    </div>
+
+
+    <div class="announcement">
+
+        <div class="announcement-date">
+            15 Sep 2026
+        </div>
+
+        <h3>
+            New Psychiatry Module Added
+        </h3>
+
+        <p>
+            A new clinical learning module
+            is now available for members.
+        </p>
+
+    </div>
+
+
+    <div class="announcement">
+
+        <div class="announcement-date">
+            10 Sep 2026
+        </div>
+
+        <h3>
+            Upcoming Clinical Discussion
+        </h3>
+
+        <p>
+            Member case discussion scheduled
+            for this month.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- UPCOMING -->
+
+<div class="section-card">
+
+    <div class="section-header">
+
+        <h2>
+            Upcoming
+        </h2>
+
+        <span
+            class="view-all"
+            onclick="showSection('events')">
+
+            View all
+
+        </span>
+
+    </div>
+
+
+    <div class="event">
+
+        <div class="event-date">
+
+            <strong>
+                22
+            </strong>
+
+            <small>
+                SEP
+            </small>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Clinical Case Discussion
+            </h3>
+
+            <p>
+                Online · 7:30 PM
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="event">
+
+        <div class="event-date">
+
+            <strong>
+                28
+            </strong>
+
+            <small>
+                SEP
+            </small>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Psychiatry Journal Club
+            </h3>
+
+            <p>
+                Online · 8:00 PM
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showSection(section) {
+
+    const names = {
+
+        dashboard: "Dashboard",
+
+        courses: "My Courses",
+
+        resources: "Resources",
+
+        events: "Events",
+
+        profile: "My Profile"
+
+    };
+
+    alert(
+        "Demo navigation\n\nOpening: "
+        + names[section]
+    );
+
+}
+
+
+/* =====================================================
+   COURSE
+===================================================== */
+
+function openCourse(course) {
+
+    alert(
+        "Opening course:\n\n"
+        + course
+        + "\n\n"
+        + "In the production version, "
+        + "this will load the protected "
+        + "course from your backend."
+    );
+
+}
+
+
+/* =====================================================
+   RESOURCE
+===================================================== */
+
+function openResource(resource) {
+
+    alert(
+        "Opening resource:\n\n"
+        + resource
+        + "\n\n"
+        + "The real version will request "
+        + "the protected file from Google "
+        + "Apps Script after authorization."
+    );
+
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+function showNotification() {
+
+    alert(
+        "You have 2 new notifications."
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to sign out?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    /*
+       Production version:
+
+       1. Clear authentication token
+       2. Clear local session
+       3. Sign out from Google
+       4. Redirect to login.html
+    */
+
+    window.location.href = "index.html";
+
+}
+
+
+/* =====================================================
+   CLOSE MOBILE SIDEBAR WHEN CLICKING OUTSIDE
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const menu =
+            document.querySelector(".mobile-menu");
+
+        if (
+            window.innerWidth <= 700 &&
+            sidebar.classList.contains("open") &&
+            !sidebar.contains(event.target) &&
+            !menu.contains(event.target)
+        ) {
+
+            sidebar.classList.remove("open");
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
